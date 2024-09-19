@@ -1,0 +1,749 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Wed Aug 07 10:15:49 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    13                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    14   000000                     
+    15                           ; Generated 17/10/2023 GMT
+    16                           ; 
+    17                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    18                           ; All rights reserved.
+    19                           ; 
+    20                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    21                           ; 
+    22                           ; Redistribution and use in source and binary forms, with or without modification, are
+    23                           ; permitted provided that the following conditions are met:
+    24                           ; 
+    25                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    26                           ;        conditions and the following disclaimer.
+    27                           ; 
+    28                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    29                           ;        of conditions and the following disclaimer in the documentation and/or other
+    30                           ;        materials provided with the distribution. Publication is not required when
+    31                           ;        this file is used in an embedded application.
+    32                           ; 
+    33                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    34                           ;        software without specific prior written permission.
+    35                           ; 
+    36                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    37                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    38                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    39                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    40                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    41                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    42                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    43                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    44                           ; 
+    45                           ; 
+    46                           ; Code-generator required, PIC18F4580 Definitions
+    47                           ; 
+    48                           ; SFR Addresses
+    49   000000                     _RC2	set	31762
+    50   000000                     _RC1	set	31761
+    51   000000                     _TRISC	set	3988
+    52   000000                     _RC0	set	31760
+    53   000000                     _TRISD	set	3989
+    54   000000                     _PORTD	set	3971
+    55                           
+    56                           	psect	smallconst
+    57   000600                     __psmallconst:
+    58                           	callstack 0
+    59   000600  00                 	db	0
+    60   000601                     STR_1:
+    61   000601  20                 	db	32
+    62   000602  61                 	db	97	;'a'
+    63   000603  73                 	db	115	;'s'
+    64   000604  68                 	db	104	;'h'
+    65   000605  69                 	db	105	;'i'
+    66   000606  62                 	db	98	;'b'
+    67   000607  61                 	db	97	;'a'
+    68   000608  20                 	db	32
+    69   000609  00                 	db	0
+    70   00060A  00                 	db	0	; dummy byte at the end
+    71   000000                     
+    72                           ; #config settings
+    73                           
+    74                           	psect	cinit
+    75   000778                     __pcinit:
+    76                           	callstack 0
+    77   000778                     start_initialization:
+    78                           	callstack 0
+    79   000778                     __initialization:
+    80                           	callstack 0
+    81   000778                     end_of_initialization:
+    82                           	callstack 0
+    83   000778                     __end_of__initialization:
+    84                           	callstack 0
+    85   000778  0E00               	movlw	low (__Lsmallconst shr (0+16))
+    86   00077A  6EF8               	movwf	tblptru,c
+    87   00077C  0E06               	movlw	high __Lsmallconst
+    88   00077E  6EF7               	movwf	tblptrh,c
+    89   000780  0100               	movlb	0
+    90   000782  EF06  F003         	goto	_main	;jump to C main() function
+    91                           
+    92                           	psect	cstackCOMRAM
+    93   000001                     __pcstackCOMRAM:
+    94                           	callstack 0
+    95   000001                     cmd@a:
+    96                           	callstack 0
+    97   000001                     data@a:
+    98                           	callstack 0
+    99                           
+   100                           ; 1 bytes @ 0x0
+   101   000001                     	ds	1
+   102   000002                     cmd@i:
+   103                           	callstack 0
+   104   000002                     data@i:
+   105                           	callstack 0
+   106                           
+   107                           ; 2 bytes @ 0x1
+   108   000002                     	ds	2
+   109   000004                     cmd@i_51:
+   110                           	callstack 0
+   111   000004                     data@i_55:
+   112                           	callstack 0
+   113                           
+   114                           ; 2 bytes @ 0x3
+   115   000004                     	ds	2
+   116   000006                     display@p:
+   117                           	callstack 0
+   118                           
+   119                           ; 1 bytes @ 0x5
+   120   000006                     	ds	1
+   121   000007                     main@i:
+   122                           	callstack 0
+   123                           
+   124                           ; 2 bytes @ 0x6
+   125   000007                     	ds	2
+   126   000009                     main@i_47:
+   127                           	callstack 0
+   128                           
+   129                           ; 2 bytes @ 0x8
+   130   000009                     	ds	2
+   131                           
+   132 ;;
+   133 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   134 ;;
+   135 ;; *************** function _main *****************
+   136 ;; Defined at:
+   137 ;;		line 12 in file "scrolling2.c"
+   138 ;; Parameters:    Size  Location     Type
+   139 ;;		None
+   140 ;; Auto vars:     Size  Location     Type
+   141 ;;  i               2    8[COMRAM] unsigned int 
+   142 ;;  i               2    6[COMRAM] int 
+   143 ;; Return value:  Size  Location     Type
+   144 ;;                  1    wreg      void 
+   145 ;; Registers used:
+   146 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   147 ;; Tracked objects:
+   148 ;;		On entry : 0/0
+   149 ;;		On exit  : 0/0
+   150 ;;		Unchanged: 0/0
+   151 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   152 ;;      Params:         0       0       0       0       0       0       0
+   153 ;;      Locals:         4       0       0       0       0       0       0
+   154 ;;      Temps:          0       0       0       0       0       0       0
+   155 ;;      Totals:         4       0       0       0       0       0       0
+   156 ;;Total ram usage:        4 bytes
+   157 ;; Hardware stack levels required when called: 2
+   158 ;; This function calls:
+   159 ;;		_cmd
+   160 ;;		_display
+   161 ;; This function is called by:
+   162 ;;		Startup code after reset
+   163 ;; This function uses a non-reentrant model
+   164 ;;
+   165                           
+   166                           	psect	text0
+   167   00060C                     __ptext0:
+   168                           	callstack 0
+   169   00060C                     _main:
+   170                           	callstack 29
+   171   00060C                     
+   172                           ;scrolling2.c: 14: TRISC=0X00;
+   173   00060C  0E00               	movlw	0
+   174   00060E  6E94               	movwf	148,c	;volatile
+   175                           
+   176                           ;scrolling2.c: 15: TRISD=0X00;
+   177   000610  0E00               	movlw	0
+   178   000612  6E95               	movwf	149,c	;volatile
+   179   000614                     
+   180                           ;scrolling2.c: 16: cmd(0x0f);
+   181   000614  0E0F               	movlw	15
+   182   000616  EC76  F003         	call	_cmd
+   183   00061A                     
+   184                           ;scrolling2.c: 17: cmd(0x0c);
+   185   00061A  0E0C               	movlw	12
+   186   00061C  EC76  F003         	call	_cmd
+   187   000620                     
+   188                           ;scrolling2.c: 18: cmd(0x8f);
+   189   000620  0E8F               	movlw	143
+   190   000622  EC76  F003         	call	_cmd
+   191   000626                     
+   192                           ;scrolling2.c: 19: display(" ashiba ");
+   193   000626  0E01               	movlw	low STR_1
+   194   000628  6E06               	movwf	display@p^0,c
+   195   00062A  ECA6  F003         	call	_display	;wreg free
+   196   00062E                     l836:
+   197                           
+   198                           ;scrolling2.c: 21: {;scrolling2.c: 22:                 for(int i=0;i<21;i++)
+   199   00062E  0E00               	movlw	0
+   200   000630  6E08               	movwf	(main@i+1)^0,c
+   201   000632  0E00               	movlw	0
+   202   000634  6E07               	movwf	main@i^0,c
+   203   000636                     l842:
+   204                           
+   205                           ;scrolling2.c: 23:                 {;scrolling2.c: 24:                 cmd(0x18);
+   206   000636  0E18               	movlw	24
+   207   000638  EC76  F003         	call	_cmd
+   208   00063C                     
+   209                           ;scrolling2.c: 26:                  for(unsigned int i=0;i<=30000;i++);
+   210   00063C  0E00               	movlw	0
+   211   00063E  6E0A               	movwf	(main@i_47+1)^0,c
+   212   000640  0E00               	movlw	0
+   213   000642  6E09               	movwf	main@i_47^0,c
+   214   000644                     l850:
+   215   000644  4A09               	infsnz	main@i_47^0,f,c
+   216   000646  2A0A               	incf	(main@i_47+1)^0,f,c
+   217   000648  0E31               	movlw	49
+   218   00064A  5C09               	subwf	main@i_47^0,w,c
+   219   00064C  0E75               	movlw	117
+   220   00064E  580A               	subwfb	(main@i_47+1)^0,w,c
+   221   000650  A0D8               	btfss	status,0,c
+   222   000652  EF2D  F003         	goto	u91
+   223   000656  EF2F  F003         	goto	u90
+   224   00065A                     u91:
+   225   00065A  EF22  F003         	goto	l850
+   226   00065E                     u90:
+   227   00065E                     
+   228                           ;scrolling2.c: 27:                 }
+   229   00065E  4A07               	infsnz	main@i^0,f,c
+   230   000660  2A08               	incf	(main@i+1)^0,f,c
+   231   000662  BE08               	btfsc	(main@i+1)^0,7,c
+   232   000664  EF3D  F003         	goto	u101
+   233   000668  5008               	movf	(main@i+1)^0,w,c
+   234   00066A  E109               	bnz	u100
+   235   00066C  0E15               	movlw	21
+   236   00066E  5C07               	subwf	main@i^0,w,c
+   237   000670  A0D8               	btfss	status,0,c
+   238   000672  EF3D  F003         	goto	u101
+   239   000676  EF3F  F003         	goto	u100
+   240   00067A                     u101:
+   241   00067A  EF1B  F003         	goto	l842
+   242   00067E                     u100:
+   243   00067E                     
+   244                           ;scrolling2.c: 28:                 cmd(0x02);
+   245   00067E  0E02               	movlw	2
+   246   000680  EC76  F003         	call	_cmd
+   247   000684  EF17  F003         	goto	l836
+   248   000688  EF00  F000         	goto	start
+   249   00068C                     __end_of_main:
+   250                           	callstack 0
+   251                           
+   252 ;; *************** function _display *****************
+   253 ;; Defined at:
+   254 ;;		line 56 in file "scrolling2.c"
+   255 ;; Parameters:    Size  Location     Type
+   256 ;;  p               1    5[COMRAM] PTR const unsigned char 
+   257 ;;		 -> STR_1(9), 
+   258 ;; Auto vars:     Size  Location     Type
+   259 ;;		None
+   260 ;; Return value:  Size  Location     Type
+   261 ;;                  1    wreg      void 
+   262 ;; Registers used:
+   263 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   264 ;; Tracked objects:
+   265 ;;		On entry : 0/0
+   266 ;;		On exit  : 0/0
+   267 ;;		Unchanged: 0/0
+   268 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   269 ;;      Params:         1       0       0       0       0       0       0
+   270 ;;      Locals:         0       0       0       0       0       0       0
+   271 ;;      Temps:          0       0       0       0       0       0       0
+   272 ;;      Totals:         1       0       0       0       0       0       0
+   273 ;;Total ram usage:        1 bytes
+   274 ;; Hardware stack levels used: 1
+   275 ;; Hardware stack levels required when called: 1
+   276 ;; This function calls:
+   277 ;;		_data
+   278 ;; This function is called by:
+   279 ;;		_main
+   280 ;; This function uses a non-reentrant model
+   281 ;;
+   282                           
+   283                           	psect	text1
+   284   00074C                     __ptext1:
+   285                           	callstack 0
+   286   00074C                     _display:
+   287                           	callstack 29
+   288   00074C                     
+   289                           ;scrolling2.c: 56: void display(const char *p);scrolling2.c: 57: {;scrolling2.c: 58:    
+      +                           while(*p)
+   290   00074C  EFAF  F003         	goto	l824
+   291   000750                     l820:
+   292                           
+   293                           ;scrolling2.c: 59:     {;scrolling2.c: 60:         data(*p);
+   294   000750  C006  FFF6         	movff	display@p,tblptrl
+   295   000754                     	if	0	;There is only one active tblptr byte
+   296   000754                     	endif
+   297   000754                     	if	0	;tblptru may be non-zero
+   298   000754                     	endif
+   299   000754                     	if	0	;tblptru may be non-zero
+   300   000754                     	endif
+   301   000754  0008               	tblrd		*
+   302   000756  50F5               	movf	tablat,w,c
+   303   000758  EC46  F003         	call	_data
+   304   00075C                     
+   305                           ;scrolling2.c: 61:         p++;
+   306   00075C  2A06               	incf	display@p^0,f,c
+   307   00075E                     l824:
+   308                           
+   309                           ;scrolling2.c: 58:     while(*p)
+   310   00075E  C006  FFF6         	movff	display@p,tblptrl
+   311   000762                     	if	0	;There is only one active tblptr byte
+   312   000762                     	endif
+   313   000762                     	if	0	;tblptru may be non-zero
+   314   000762                     	endif
+   315   000762                     	if	0	;tblptru may be non-zero
+   316   000762                     	endif
+   317   000762  0008               	tblrd		*
+   318   000764  50F5               	movf	tablat,w,c
+   319   000766  0900               	iorlw	0
+   320   000768  A4D8               	btfss	status,2,c
+   321   00076A  EFB9  F003         	goto	u81
+   322   00076E  EFBB  F003         	goto	u80
+   323   000772                     u81:
+   324   000772  EFA8  F003         	goto	l820
+   325   000776                     u80:
+   326   000776  0012               	return		;funcret
+   327   000778                     __end_of_display:
+   328                           	callstack 0
+   329                           
+   330 ;; *************** function _data *****************
+   331 ;; Defined at:
+   332 ;;		line 44 in file "scrolling2.c"
+   333 ;; Parameters:    Size  Location     Type
+   334 ;;  a               1    wreg     unsigned char 
+   335 ;; Auto vars:     Size  Location     Type
+   336 ;;  a               1    0[COMRAM] unsigned char 
+   337 ;;  i               2    3[COMRAM] int 
+   338 ;;  i               2    1[COMRAM] int 
+   339 ;; Return value:  Size  Location     Type
+   340 ;;                  1    wreg      void 
+   341 ;; Registers used:
+   342 ;;		wreg, status,2, status,0
+   343 ;; Tracked objects:
+   344 ;;		On entry : 0/0
+   345 ;;		On exit  : 0/0
+   346 ;;		Unchanged: 0/0
+   347 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   348 ;;      Params:         0       0       0       0       0       0       0
+   349 ;;      Locals:         5       0       0       0       0       0       0
+   350 ;;      Temps:          0       0       0       0       0       0       0
+   351 ;;      Totals:         5       0       0       0       0       0       0
+   352 ;;Total ram usage:        5 bytes
+   353 ;; Hardware stack levels used: 1
+   354 ;; This function calls:
+   355 ;;		Nothing
+   356 ;; This function is called by:
+   357 ;;		_display
+   358 ;; This function uses a non-reentrant model
+   359 ;;
+   360                           
+   361                           	psect	text2
+   362   00068C                     __ptext2:
+   363                           	callstack 0
+   364   00068C                     _data:
+   365                           	callstack 29
+   366                           
+   367                           ;incstack = 0
+   368                           ;data@a stored from wreg
+   369   00068C  6E01               	movwf	data@a^0,c
+   370   00068E                     
+   371                           ;scrolling2.c: 44: void data(unsigned char a );scrolling2.c: 45: {;scrolling2.c: 47:    
+      +                           RC0=1;
+   372   00068E  8082               	bsf	3970,0,c	;volatile
+   373                           
+   374                           ;scrolling2.c: 48:     RC1=0;
+   375   000690  9282               	bcf	3970,1,c	;volatile
+   376   000692                     
+   377                           ;scrolling2.c: 49:     PORTD=a;
+   378   000692  C001  FF83         	movff	data@a,3971	;volatile
+   379   000696                     
+   380                           ;scrolling2.c: 50:     RC2=1;
+   381   000696  8482               	bsf	3970,2,c	;volatile
+   382   000698                     
+   383                           ;scrolling2.c: 51:     for(int i=0;i<=100;i++);
+   384   000698  0E00               	movlw	0
+   385   00069A  6E03               	movwf	(data@i+1)^0,c
+   386   00069C  0E00               	movlw	0
+   387   00069E  6E02               	movwf	data@i^0,c
+   388   0006A0                     l736:
+   389   0006A0  4A02               	infsnz	data@i^0,f,c
+   390   0006A2  2A03               	incf	(data@i+1)^0,f,c
+   391   0006A4  BE03               	btfsc	(data@i+1)^0,7,c
+   392   0006A6  EF5E  F003         	goto	u11
+   393   0006AA  5003               	movf	(data@i+1)^0,w,c
+   394   0006AC  E109               	bnz	u10
+   395   0006AE  0E65               	movlw	101
+   396   0006B0  5C02               	subwf	data@i^0,w,c
+   397   0006B2  A0D8               	btfss	status,0,c
+   398   0006B4  EF5E  F003         	goto	u11
+   399   0006B8  EF60  F003         	goto	u10
+   400   0006BC                     u11:
+   401   0006BC  EF50  F003         	goto	l736
+   402   0006C0                     u10:
+   403   0006C0                     
+   404                           ;scrolling2.c: 52:     RC2=0;
+   405   0006C0  9482               	bcf	3970,2,c	;volatile
+   406   0006C2                     
+   407                           ;scrolling2.c: 53:     for(int i=0;i<=5000;i++);
+   408   0006C2  0E00               	movlw	0
+   409   0006C4  6E05               	movwf	(data@i_55+1)^0,c
+   410   0006C6  0E00               	movlw	0
+   411   0006C8  6E04               	movwf	data@i_55^0,c
+   412   0006CA                     l746:
+   413   0006CA  4A04               	infsnz	data@i_55^0,f,c
+   414   0006CC  2A05               	incf	(data@i_55+1)^0,f,c
+   415   0006CE  BE05               	btfsc	(data@i_55+1)^0,7,c
+   416   0006D0  EF73  F003         	goto	u21
+   417   0006D4  0E89               	movlw	137
+   418   0006D6  5C04               	subwf	data@i_55^0,w,c
+   419   0006D8  0E13               	movlw	19
+   420   0006DA  5805               	subwfb	(data@i_55+1)^0,w,c
+   421   0006DC  A0D8               	btfss	status,0,c
+   422   0006DE  EF73  F003         	goto	u21
+   423   0006E2  EF75  F003         	goto	u20
+   424   0006E6                     u21:
+   425   0006E6  EF65  F003         	goto	l746
+   426   0006EA                     u20:
+   427   0006EA  0012               	return		;funcret
+   428   0006EC                     __end_of_data:
+   429                           	callstack 0
+   430                           
+   431 ;; *************** function _cmd *****************
+   432 ;; Defined at:
+   433 ;;		line 34 in file "scrolling2.c"
+   434 ;; Parameters:    Size  Location     Type
+   435 ;;  a               1    wreg     unsigned char 
+   436 ;; Auto vars:     Size  Location     Type
+   437 ;;  a               1    0[COMRAM] unsigned char 
+   438 ;;  i               2    3[COMRAM] int 
+   439 ;;  i               2    1[COMRAM] int 
+   440 ;; Return value:  Size  Location     Type
+   441 ;;                  1    wreg      void 
+   442 ;; Registers used:
+   443 ;;		wreg, status,2, status,0
+   444 ;; Tracked objects:
+   445 ;;		On entry : 0/0
+   446 ;;		On exit  : 0/0
+   447 ;;		Unchanged: 0/0
+   448 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   449 ;;      Params:         0       0       0       0       0       0       0
+   450 ;;      Locals:         5       0       0       0       0       0       0
+   451 ;;      Temps:          0       0       0       0       0       0       0
+   452 ;;      Totals:         5       0       0       0       0       0       0
+   453 ;;Total ram usage:        5 bytes
+   454 ;; Hardware stack levels used: 1
+   455 ;; This function calls:
+   456 ;;		Nothing
+   457 ;; This function is called by:
+   458 ;;		_main
+   459 ;; This function uses a non-reentrant model
+   460 ;;
+   461                           
+   462                           	psect	text3
+   463   0006EC                     __ptext3:
+   464                           	callstack 0
+   465   0006EC                     _cmd:
+   466                           	callstack 30
+   467                           
+   468                           ;incstack = 0
+   469                           ;cmd@a stored from wreg
+   470   0006EC  6E01               	movwf	cmd@a^0,c
+   471   0006EE                     
+   472                           ;scrolling2.c: 34: void cmd(unsigned char a );scrolling2.c: 35: {;scrolling2.c: 36:     
+      +                          RC0=0;
+   473   0006EE  9082               	bcf	3970,0,c	;volatile
+   474                           
+   475                           ;scrolling2.c: 37:     RC1=0;
+   476   0006F0  9282               	bcf	3970,1,c	;volatile
+   477   0006F2                     
+   478                           ;scrolling2.c: 38:     PORTD=a;
+   479   0006F2  C001  FF83         	movff	cmd@a,3971	;volatile
+   480   0006F6                     
+   481                           ;scrolling2.c: 39:     RC2=1;
+   482   0006F6  8482               	bsf	3970,2,c	;volatile
+   483   0006F8                     
+   484                           ;scrolling2.c: 40:     for(int i=0;i<=100;i++);
+   485   0006F8  0E00               	movlw	0
+   486   0006FA  6E03               	movwf	(cmd@i+1)^0,c
+   487   0006FC  0E00               	movlw	0
+   488   0006FE  6E02               	movwf	cmd@i^0,c
+   489   000700                     l762:
+   490   000700  4A02               	infsnz	cmd@i^0,f,c
+   491   000702  2A03               	incf	(cmd@i+1)^0,f,c
+   492   000704  BE03               	btfsc	(cmd@i+1)^0,7,c
+   493   000706  EF8E  F003         	goto	u31
+   494   00070A  5003               	movf	(cmd@i+1)^0,w,c
+   495   00070C  E109               	bnz	u30
+   496   00070E  0E65               	movlw	101
+   497   000710  5C02               	subwf	cmd@i^0,w,c
+   498   000712  A0D8               	btfss	status,0,c
+   499   000714  EF8E  F003         	goto	u31
+   500   000718  EF90  F003         	goto	u30
+   501   00071C                     u31:
+   502   00071C  EF80  F003         	goto	l762
+   503   000720                     u30:
+   504   000720                     
+   505                           ;scrolling2.c: 41:     RC2=0;
+   506   000720  9482               	bcf	3970,2,c	;volatile
+   507   000722                     
+   508                           ;scrolling2.c: 42:     for(int i=0;i<=5000;i++);
+   509   000722  0E00               	movlw	0
+   510   000724  6E05               	movwf	(cmd@i_51+1)^0,c
+   511   000726  0E00               	movlw	0
+   512   000728  6E04               	movwf	cmd@i_51^0,c
+   513   00072A                     l772:
+   514   00072A  4A04               	infsnz	cmd@i_51^0,f,c
+   515   00072C  2A05               	incf	(cmd@i_51+1)^0,f,c
+   516   00072E  BE05               	btfsc	(cmd@i_51+1)^0,7,c
+   517   000730  EFA3  F003         	goto	u41
+   518   000734  0E89               	movlw	137
+   519   000736  5C04               	subwf	cmd@i_51^0,w,c
+   520   000738  0E13               	movlw	19
+   521   00073A  5805               	subwfb	(cmd@i_51+1)^0,w,c
+   522   00073C  A0D8               	btfss	status,0,c
+   523   00073E  EFA3  F003         	goto	u41
+   524   000742  EFA5  F003         	goto	u40
+   525   000746                     u41:
+   526   000746  EF95  F003         	goto	l772
+   527   00074A                     u40:
+   528   00074A  0012               	return		;funcret
+   529   00074C                     __end_of_cmd:
+   530                           	callstack 0
+   531                           
+   532                           	psect	rparam
+   533   000000                     tosu	equ	0xFFF
+   534                           tosh	equ	0xFFE
+   535                           tosl	equ	0xFFD
+   536                           stkptr	equ	0xFFC
+   537                           pclatu	equ	0xFFB
+   538                           pclath	equ	0xFFA
+   539                           pcl	equ	0xFF9
+   540                           tblptru	equ	0xFF8
+   541                           tblptrh	equ	0xFF7
+   542                           tblptrl	equ	0xFF6
+   543                           tablat	equ	0xFF5
+   544                           prodh	equ	0xFF4
+   545                           prodl	equ	0xFF3
+   546                           indf0	equ	0xFEF
+   547                           postinc0	equ	0xFEE
+   548                           postdec0	equ	0xFED
+   549                           preinc0	equ	0xFEC
+   550                           plusw0	equ	0xFEB
+   551                           fsr0h	equ	0xFEA
+   552                           fsr0l	equ	0xFE9
+   553                           wreg	equ	0xFE8
+   554                           indf1	equ	0xFE7
+   555                           postinc1	equ	0xFE6
+   556                           postdec1	equ	0xFE5
+   557                           preinc1	equ	0xFE4
+   558                           plusw1	equ	0xFE3
+   559                           fsr1h	equ	0xFE2
+   560                           fsr1l	equ	0xFE1
+   561                           bsr	equ	0xFE0
+   562                           indf2	equ	0xFDF
+   563                           postinc2	equ	0xFDE
+   564                           postdec2	equ	0xFDD
+   565                           preinc2	equ	0xFDC
+   566                           plusw2	equ	0xFDB
+   567                           fsr2h	equ	0xFDA
+   568                           fsr2l	equ	0xFD9
+   569                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     9
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     10      10
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    display@p	PTR const unsigned char  size(1) Largest target is 9
+		 -> STR_1(CODE[9]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_display
+    _display->_data
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     4      0     363
+                                              6 COMRAM     4     4      0
+                                _cmd
+                            _display
+ ---------------------------------------------------------------------------------
+ (1) _display                                              1     0      1     196
+                                              5 COMRAM     1     0      1
+                               _data
+ ---------------------------------------------------------------------------------
+ (2) _data                                                 5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ (1) _cmd                                                  5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _cmd
+   _display
+     _data
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      A       A       1       10.5%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBIGSFRh          6A      0       0      16        0.0%
+BITBIGSFRlh         10      0       0      17        0.0%
+BITBIGSFRll        282      0       0      18        0.0%
+ABS                  0      0       0      19        0.0%
+BIGRAM             5FF      0       0      20        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Wed Aug 07 10:15:49 2024
+
+                     l32 0720                       l42 06EA                       l35 074A  
+                     l39 06C0                       l48 0776                       u10 06C0  
+                     u11 06BC                       u20 06EA                       u21 06E6  
+                     u30 0720                       u31 071C                       u40 074A  
+                     u41 0746                       u80 0776                       u81 0772  
+                     u90 065E                       u91 065A                      l730 0698  
+                    l740 06C2                      l724 068E                      l820 0750  
+                    l750 06EE                      l726 0692                      l822 075C  
+                    l830 061A                      l752 06F2                      l736 06A0  
+                    l728 0696                      l824 075E                      l832 0620  
+                    l762 0700                      l754 06F6                      l746 06CA  
+                    l738 06A4                      l818 074C                      l850 0644  
+                    l842 0636                      l834 0626                      l826 060C  
+                    l772 072A                      l764 0704                      l756 06F8  
+                    l748 06CE                      l852 0648                      l844 063C  
+                    l836 062E                      l828 0614                      l774 072E  
+                    l766 0722                      l854 065E                      l856 0662  
+                    l858 067E                      _RC0 7C10                      _RC1 7C11  
+                    _RC2 7C12                      u100 067E                      u101 067A  
+                    _cmd 06EC                     ?_cmd 0001                     STR_1 0601  
+                   _data 068C                     cmd@a 0001                     cmd@i 0002  
+                   _main 060C                     start 0000             ___param_bank 0000  
+                  ??_cmd 0001                    ?_data 0001                    ?_main 0001  
+                  _PORTD 0F83                    _TRISC 0F94                    _TRISD 0F95  
+        __end_of_display 0778                    data@a 0001                    data@i 0002  
+                  main@i 0007                    tablat 0FF5                    status 0FD8  
+        __initialization 0778             __end_of_data 06EC             __end_of_main 068C  
+                 ??_data 0001                   ??_main 0007            __activetblptr 0001  
+                 isa$std 0001                ??_display 0007             __mediumconst 0000  
+                 tblptrh 0FF7                   tblptrl 0FF6                   tblptru 0FF8  
+             __accesstop 0060  __end_of__initialization 0778            ___rparam_used 0001  
+         __pcstackCOMRAM 0001                  __Hparam 0000                  __Lparam 0000  
+           __psmallconst 0600                  __pcinit 0778                  __ramtop 0600  
+                cmd@i_51 0004                  __ptext0 060C                  __ptext1 074C  
+                __ptext2 068C                  __ptext3 06EC                  _display 074C  
+   end_of_initialization 0778      start_initialization 0778              __end_of_cmd 074C  
+               ?_display 0006              __smallconst 0600                 __Hrparam 0000  
+               __Lrparam 0000             __Lsmallconst 0600                 data@i_55 0004  
+               isa$xinst 0000                 main@i_47 0009                 display@p 0006  

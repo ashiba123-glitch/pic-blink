@@ -1,0 +1,901 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Mon Aug 12 10:02:11 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    11                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+    12                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    13                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    14   000000                     
+    15                           ; Generated 17/10/2023 GMT
+    16                           ; 
+    17                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    18                           ; All rights reserved.
+    19                           ; 
+    20                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    21                           ; 
+    22                           ; Redistribution and use in source and binary forms, with or without modification, are
+    23                           ; permitted provided that the following conditions are met:
+    24                           ; 
+    25                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    26                           ;        conditions and the following disclaimer.
+    27                           ; 
+    28                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    29                           ;        of conditions and the following disclaimer in the documentation and/or other
+    30                           ;        materials provided with the distribution. Publication is not required when
+    31                           ;        this file is used in an embedded application.
+    32                           ; 
+    33                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    34                           ;        software without specific prior written permission.
+    35                           ; 
+    36                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    37                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    38                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    39                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    40                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    41                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    42                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    43                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    44                           ; 
+    45                           ; 
+    46                           ; Code-generator required, PIC18F4580 Definitions
+    47                           ; 
+    48                           ; SFR Addresses
+    49   000000                     _PORTB	set	3969
+    50   000000                     _RC2	set	31762
+    51   000000                     _RC1	set	31761
+    52   000000                     _RB7	set	31759
+    53   000000                     _RB6	set	31758
+    54   000000                     _RB5	set	31757
+    55   000000                     _TRISB	set	3987
+    56   000000                     _ADCON1	set	4033
+    57   000000                     _RB4	set	31756
+    58   000000                     _TRISD	set	3989
+    59   000000                     _TRISC	set	3988
+    60   000000                     _PORTD	set	3971
+    61   000000                     _RC0	set	31760
+    62                           
+    63                           ; #config settings
+    64                           
+    65                           	psect	cinit
+    66   000886                     __pcinit:
+    67                           	callstack 0
+    68   000886                     start_initialization:
+    69                           	callstack 0
+    70   000886                     __initialization:
+    71                           	callstack 0
+    72   000886                     end_of_initialization:
+    73                           	callstack 0
+    74   000886                     __end_of__initialization:
+    75                           	callstack 0
+    76   000886  0100               	movlb	0
+    77   000888  EFAC  F003         	goto	_main	;jump to C main() function
+    78                           
+    79                           	psect	cstackCOMRAM
+    80   000001                     __pcstackCOMRAM:
+    81                           	callstack 0
+    82   000001                     cmd@a:
+    83                           	callstack 0
+    84   000001                     data@a:
+    85                           	callstack 0
+    86                           
+    87                           ; 1 bytes @ 0x0
+    88   000001                     	ds	1
+    89   000002                     cmd@i:
+    90                           	callstack 0
+    91   000002                     data@i:
+    92                           	callstack 0
+    93                           
+    94                           ; 2 bytes @ 0x1
+    95   000002                     	ds	2
+    96   000004                     cmd@i_60:
+    97                           	callstack 0
+    98   000004                     data@i_64:
+    99                           	callstack 0
+   100                           
+   101                           ; 2 bytes @ 0x3
+   102   000004                     	ds	2
+   103   000006                     main@a:
+   104                           	callstack 0
+   105                           
+   106                           ; 1 bytes @ 0x5
+   107   000006                     	ds	1
+   108                           
+   109 ;;
+   110 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   111 ;;
+   112 ;; *************** function _main *****************
+   113 ;; Defined at:
+   114 ;;		line 15 in file "driverkeypad2.c"
+   115 ;; Parameters:    Size  Location     Type
+   116 ;;		None
+   117 ;; Auto vars:     Size  Location     Type
+   118 ;;  a               1    5[COMRAM] unsigned char 
+   119 ;; Return value:  Size  Location     Type
+   120 ;;                  1    wreg      void 
+   121 ;; Registers used:
+   122 ;;		wreg, status,2, status,0, cstack
+   123 ;; Tracked objects:
+   124 ;;		On entry : 0/0
+   125 ;;		On exit  : 0/0
+   126 ;;		Unchanged: 0/0
+   127 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   128 ;;      Params:         0       0       0       0       0       0       0
+   129 ;;      Locals:         1       0       0       0       0       0       0
+   130 ;;      Temps:          0       0       0       0       0       0       0
+   131 ;;      Totals:         1       0       0       0       0       0       0
+   132 ;;Total ram usage:        1 bytes
+   133 ;; Hardware stack levels required when called: 1
+   134 ;; This function calls:
+   135 ;;		_cmd
+   136 ;;		_data
+   137 ;;		_keypad
+   138 ;; This function is called by:
+   139 ;;		Startup code after reset
+   140 ;; This function uses a non-reentrant model
+   141 ;;
+   142                           
+   143                           	psect	text0
+   144   000758                     __ptext0:
+   145                           	callstack 0
+   146   000758                     _main:
+   147                           	callstack 30
+   148   000758                     
+   149                           ;driverkeypad2.c: 16:     ADCON1=0X0F;
+   150   000758  0E0F               	movlw	15
+   151   00075A  6EC1               	movwf	193,c	;volatile
+   152                           
+   153                           ;driverkeypad2.c: 17:     TRISB=0XF0;
+   154   00075C  0EF0               	movlw	240
+   155   00075E  6E93               	movwf	147,c	;volatile
+   156                           
+   157                           ;driverkeypad2.c: 18:     TRISC=0X00;
+   158   000760  0E00               	movlw	0
+   159   000762  6E94               	movwf	148,c	;volatile
+   160                           
+   161                           ;driverkeypad2.c: 19:     TRISD=0X00;
+   162   000764  0E00               	movlw	0
+   163   000766  6E95               	movwf	149,c	;volatile
+   164   000768                     
+   165                           ;driverkeypad2.c: 20:     cmd(0x0f);
+   166   000768  0E0F               	movlw	15
+   167   00076A  EC13  F004         	call	_cmd
+   168   00076E                     
+   169                           ;driverkeypad2.c: 21:     cmd(0x01);
+   170   00076E  0E01               	movlw	1
+   171   000770  EC13  F004         	call	_cmd
+   172   000774                     
+   173                           ;driverkeypad2.c: 22:     cmd(0x38);
+   174   000774  0E38               	movlw	56
+   175   000776  EC13  F004         	call	_cmd
+   176   00077A                     l937:
+   177                           
+   178                           ;driverkeypad2.c: 24:     {;driverkeypad2.c: 25:         unsigned char a;;driverkeypad2.
+      +                          c: 26:         a=keypad();
+   179   00077A  EC01  F003         	call	_keypad	;wreg free
+   180   00077E  6E06               	movwf	main@a^0,c
+   181   000780                     
+   182                           ;driverkeypad2.c: 27:         data(a);
+   183   000780  5006               	movf	main@a^0,w,c
+   184   000782  ECE3  F003         	call	_data
+   185   000786                     l38:
+   186   000786  A881               	btfss	3969,4,c	;volatile
+   187   000788  EFC8  F003         	goto	u211
+   188   00078C  EFCA  F003         	goto	u210
+   189   000790                     u211:
+   190   000790  EFC3  F003         	goto	l38
+   191   000794                     u210:
+   192   000794  AA81               	btfss	3969,5,c	;volatile
+   193   000796  EFCF  F003         	goto	u221
+   194   00079A  EFD1  F003         	goto	u220
+   195   00079E                     u221:
+   196   00079E  EFC3  F003         	goto	l38
+   197   0007A2                     u220:
+   198   0007A2  AC81               	btfss	3969,6,c	;volatile
+   199   0007A4  EFD6  F003         	goto	u231
+   200   0007A8  EFD8  F003         	goto	u230
+   201   0007AC                     u231:
+   202   0007AC  EFC3  F003         	goto	l38
+   203   0007B0                     u230:
+   204   0007B0  AE81               	btfss	3969,7,c	;volatile
+   205   0007B2  EFDD  F003         	goto	u241
+   206   0007B6  EFDF  F003         	goto	u240
+   207   0007BA                     u241:
+   208   0007BA  EFC3  F003         	goto	l38
+   209   0007BE                     u240:
+   210   0007BE  EFBD  F003         	goto	l937
+   211   0007C2  EF00  F000         	goto	start
+   212   0007C6                     __end_of_main:
+   213                           	callstack 0
+   214                           
+   215 ;; *************** function _keypad *****************
+   216 ;; Defined at:
+   217 ;;		line 59 in file "driverkeypad2.c"
+   218 ;; Parameters:    Size  Location     Type
+   219 ;;		None
+   220 ;; Auto vars:     Size  Location     Type
+   221 ;;		None
+   222 ;; Return value:  Size  Location     Type
+   223 ;;                  1    wreg      unsigned char 
+   224 ;; Registers used:
+   225 ;;		wreg, status,2
+   226 ;; Tracked objects:
+   227 ;;		On entry : 0/0
+   228 ;;		On exit  : 0/0
+   229 ;;		Unchanged: 0/0
+   230 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   231 ;;      Params:         0       0       0       0       0       0       0
+   232 ;;      Locals:         0       0       0       0       0       0       0
+   233 ;;      Temps:          0       0       0       0       0       0       0
+   234 ;;      Totals:         0       0       0       0       0       0       0
+   235 ;;Total ram usage:        0 bytes
+   236 ;; Hardware stack levels used: 1
+   237 ;; This function calls:
+   238 ;;		Nothing
+   239 ;; This function is called by:
+   240 ;;		_main
+   241 ;; This function uses a non-reentrant model
+   242 ;;
+   243                           
+   244                           	psect	text1
+   245   000602                     __ptext1:
+   246                           	callstack 0
+   247   000602                     _keypad:
+   248                           	callstack 30
+   249   000602                     l66:
+   250   000602                     
+   251                           ;driverkeypad2.c: 62:      {;driverkeypad2.c: 63:     PORTB=0X0E;
+   252   000602  0E0E               	movlw	14
+   253   000604  6E81               	movwf	129,c	;volatile
+   254   000606                     
+   255                           ;driverkeypad2.c: 64:     if(RB4==0)
+   256   000606  B881               	btfsc	3969,4,c	;volatile
+   257   000608  EF08  F003         	goto	u31
+   258   00060C  EF0A  F003         	goto	u30
+   259   000610                     u31:
+   260   000610  EF0D  F003         	goto	l67
+   261   000614                     u30:
+   262   000614                     
+   263                           ;driverkeypad2.c: 65:     {;driverkeypad2.c: 66:         return '0';
+   264   000614  0E30               	movlw	48
+   265   000616  EFAB  F003         	goto	l68
+   266   00061A                     l67:
+   267   00061A  BA81               	btfsc	3969,5,c	;volatile
+   268   00061C  EF12  F003         	goto	u41
+   269   000620  EF14  F003         	goto	u40
+   270   000624                     u41:
+   271   000624  EF17  F003         	goto	l70
+   272   000628                     u40:
+   273   000628                     
+   274                           ;driverkeypad2.c: 69:     {;driverkeypad2.c: 70:         return '1';
+   275   000628  0E31               	movlw	49
+   276   00062A  EFAB  F003         	goto	l68
+   277   00062E                     l70:
+   278   00062E  BC81               	btfsc	3969,6,c	;volatile
+   279   000630  EF1C  F003         	goto	u51
+   280   000634  EF1E  F003         	goto	u50
+   281   000638                     u51:
+   282   000638  EF21  F003         	goto	l72
+   283   00063C                     u50:
+   284   00063C                     
+   285                           ;driverkeypad2.c: 73:     {;driverkeypad2.c: 74:         return '2';
+   286   00063C  0E32               	movlw	50
+   287   00063E  EFAB  F003         	goto	l68
+   288   000642                     l72:
+   289   000642  BE81               	btfsc	3969,7,c	;volatile
+   290   000644  EF26  F003         	goto	u61
+   291   000648  EF28  F003         	goto	u60
+   292   00064C                     u61:
+   293   00064C  EF2B  F003         	goto	l71
+   294   000650                     u60:
+   295   000650                     
+   296                           ;driverkeypad2.c: 77:     {;driverkeypad2.c: 78:         return '3';
+   297   000650  0E33               	movlw	51
+   298   000652  EFAB  F003         	goto	l68
+   299   000656                     l71:
+   300   000656                     
+   301                           ;driverkeypad2.c: 80:     PORTB=0X0D;
+   302   000656  0E0D               	movlw	13
+   303   000658  6E81               	movwf	129,c	;volatile
+   304   00065A                     
+   305                           ;driverkeypad2.c: 81:      if(RB4==0)
+   306   00065A  B881               	btfsc	3969,4,c	;volatile
+   307   00065C  EF32  F003         	goto	u71
+   308   000660  EF34  F003         	goto	u70
+   309   000664                     u71:
+   310   000664  EF37  F003         	goto	l75
+   311   000668                     u70:
+   312   000668                     
+   313                           ;driverkeypad2.c: 82:     {;driverkeypad2.c: 83:          return '4';
+   314   000668  0E34               	movlw	52
+   315   00066A  EFAB  F003         	goto	l68
+   316   00066E                     l75:
+   317   00066E  BA81               	btfsc	3969,5,c	;volatile
+   318   000670  EF3C  F003         	goto	u81
+   319   000674  EF3E  F003         	goto	u80
+   320   000678                     u81:
+   321   000678  EF41  F003         	goto	l77
+   322   00067C                     u80:
+   323   00067C                     
+   324                           ;driverkeypad2.c: 86:     {;driverkeypad2.c: 87:         return '5';
+   325   00067C  0E35               	movlw	53
+   326   00067E  EFAB  F003         	goto	l68
+   327   000682                     l77:
+   328   000682  BC81               	btfsc	3969,6,c	;volatile
+   329   000684  EF46  F003         	goto	u91
+   330   000688  EF48  F003         	goto	u90
+   331   00068C                     u91:
+   332   00068C  EF4B  F003         	goto	l79
+   333   000690                     u90:
+   334   000690                     
+   335                           ;driverkeypad2.c: 90:     {;driverkeypad2.c: 91:         return '6';
+   336   000690  0E36               	movlw	54
+   337   000692  EFAB  F003         	goto	l68
+   338   000696                     l79:
+   339   000696  BE81               	btfsc	3969,7,c	;volatile
+   340   000698  EF50  F003         	goto	u101
+   341   00069C  EF52  F003         	goto	u100
+   342   0006A0                     u101:
+   343   0006A0  EF55  F003         	goto	l78
+   344   0006A4                     u100:
+   345   0006A4                     
+   346                           ;driverkeypad2.c: 94:     {;driverkeypad2.c: 95:         return '7';
+   347   0006A4  0E37               	movlw	55
+   348   0006A6  EFAB  F003         	goto	l68
+   349   0006AA                     l78:
+   350   0006AA                     
+   351                           ;driverkeypad2.c: 97:     PORTB=0X0B;
+   352   0006AA  0E0B               	movlw	11
+   353   0006AC  6E81               	movwf	129,c	;volatile
+   354   0006AE                     
+   355                           ;driverkeypad2.c: 98:      if(RB4==0)
+   356   0006AE  B881               	btfsc	3969,4,c	;volatile
+   357   0006B0  EF5C  F003         	goto	u111
+   358   0006B4  EF5E  F003         	goto	u110
+   359   0006B8                     u111:
+   360   0006B8  EF61  F003         	goto	l82
+   361   0006BC                     u110:
+   362   0006BC                     
+   363                           ;driverkeypad2.c: 99:     {;driverkeypad2.c: 100:          return '8';
+   364   0006BC  0E38               	movlw	56
+   365   0006BE  EFAB  F003         	goto	l68
+   366   0006C2                     l82:
+   367   0006C2  BA81               	btfsc	3969,5,c	;volatile
+   368   0006C4  EF66  F003         	goto	u121
+   369   0006C8  EF68  F003         	goto	u120
+   370   0006CC                     u121:
+   371   0006CC  EF6B  F003         	goto	l84
+   372   0006D0                     u120:
+   373   0006D0                     
+   374                           ;driverkeypad2.c: 103:     {;driverkeypad2.c: 104:         return '9';
+   375   0006D0  0E39               	movlw	57
+   376   0006D2  EFAB  F003         	goto	l68
+   377   0006D6                     l84:
+   378   0006D6  BC81               	btfsc	3969,6,c	;volatile
+   379   0006D8  EF70  F003         	goto	u131
+   380   0006DC  EF72  F003         	goto	u130
+   381   0006E0                     u131:
+   382   0006E0  EF75  F003         	goto	l86
+   383   0006E4                     u130:
+   384   0006E4                     
+   385                           ;driverkeypad2.c: 107:     {;driverkeypad2.c: 108:         return 'A';
+   386   0006E4  0E41               	movlw	65
+   387   0006E6  EFAB  F003         	goto	l68
+   388   0006EA                     l86:
+   389   0006EA  BE81               	btfsc	3969,7,c	;volatile
+   390   0006EC  EF7A  F003         	goto	u141
+   391   0006F0  EF7C  F003         	goto	u140
+   392   0006F4                     u141:
+   393   0006F4  EF7F  F003         	goto	l85
+   394   0006F8                     u140:
+   395   0006F8                     
+   396                           ;driverkeypad2.c: 111:     {;driverkeypad2.c: 112:         return 'B';
+   397   0006F8  0E42               	movlw	66
+   398   0006FA  EFAB  F003         	goto	l68
+   399   0006FE                     l85:
+   400   0006FE                     
+   401                           ;driverkeypad2.c: 114:     PORTB=0X07;
+   402   0006FE  0E07               	movlw	7
+   403   000700  6E81               	movwf	129,c	;volatile
+   404   000702                     
+   405                           ;driverkeypad2.c: 115:     if(RB4==0)
+   406   000702  B881               	btfsc	3969,4,c	;volatile
+   407   000704  EF86  F003         	goto	u151
+   408   000708  EF88  F003         	goto	u150
+   409   00070C                     u151:
+   410   00070C  EF8B  F003         	goto	l89
+   411   000710                     u150:
+   412   000710                     
+   413                           ;driverkeypad2.c: 116:     {;driverkeypad2.c: 117:         return 'C';
+   414   000710  0E43               	movlw	67
+   415   000712  EFAB  F003         	goto	l68
+   416   000716                     l89:
+   417   000716  BA81               	btfsc	3969,5,c	;volatile
+   418   000718  EF90  F003         	goto	u161
+   419   00071C  EF92  F003         	goto	u160
+   420   000720                     u161:
+   421   000720  EF95  F003         	goto	l91
+   422   000724                     u160:
+   423   000724                     
+   424                           ;driverkeypad2.c: 120:     {;driverkeypad2.c: 121:         return 'D';
+   425   000724  0E44               	movlw	68
+   426   000726  EFAB  F003         	goto	l68
+   427   00072A                     l91:
+   428   00072A  BC81               	btfsc	3969,6,c	;volatile
+   429   00072C  EF9A  F003         	goto	u171
+   430   000730  EF9C  F003         	goto	u170
+   431   000734                     u171:
+   432   000734  EF9F  F003         	goto	l93
+   433   000738                     u170:
+   434   000738                     
+   435                           ;driverkeypad2.c: 124:     {;driverkeypad2.c: 125:         return 'E';
+   436   000738  0E45               	movlw	69
+   437   00073A  EFAB  F003         	goto	l68
+   438   00073E                     l93:
+   439   00073E  BE81               	btfsc	3969,7,c	;volatile
+   440   000740  EFA4  F003         	goto	u181
+   441   000744  EFA6  F003         	goto	u180
+   442   000748                     u181:
+   443   000748  EFA9  F003         	goto	l90
+   444   00074C                     u180:
+   445   00074C                     
+   446                           ;driverkeypad2.c: 128:     {;driverkeypad2.c: 129:         return 'F';
+   447   00074C  0E46               	movlw	70
+   448   00074E  EFAB  F003         	goto	l68
+   449   000752                     l90:
+   450   000752  EF01  F003         	goto	l66
+   451   000756                     l68:
+   452   000756  0012               	return		;funcret
+   453   000758                     __end_of_keypad:
+   454                           	callstack 0
+   455                           
+   456 ;; *************** function _data *****************
+   457 ;; Defined at:
+   458 ;;		line 41 in file "driverkeypad2.c"
+   459 ;; Parameters:    Size  Location     Type
+   460 ;;  a               1    wreg     unsigned char 
+   461 ;; Auto vars:     Size  Location     Type
+   462 ;;  a               1    0[COMRAM] unsigned char 
+   463 ;;  i               2    3[COMRAM] int 
+   464 ;;  i               2    1[COMRAM] int 
+   465 ;; Return value:  Size  Location     Type
+   466 ;;                  1    wreg      void 
+   467 ;; Registers used:
+   468 ;;		wreg, status,2, status,0
+   469 ;; Tracked objects:
+   470 ;;		On entry : 0/0
+   471 ;;		On exit  : 0/0
+   472 ;;		Unchanged: 0/0
+   473 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   474 ;;      Params:         0       0       0       0       0       0       0
+   475 ;;      Locals:         5       0       0       0       0       0       0
+   476 ;;      Temps:          0       0       0       0       0       0       0
+   477 ;;      Totals:         5       0       0       0       0       0       0
+   478 ;;Total ram usage:        5 bytes
+   479 ;; Hardware stack levels used: 1
+   480 ;; This function calls:
+   481 ;;		Nothing
+   482 ;; This function is called by:
+   483 ;;		_main
+   484 ;;		_display
+   485 ;; This function uses a non-reentrant model
+   486 ;;
+   487                           
+   488                           	psect	text2
+   489   0007C6                     __ptext2:
+   490                           	callstack 0
+   491   0007C6                     _data:
+   492                           	callstack 30
+   493                           
+   494                           ;incstack = 0
+   495                           ;data@a stored from wreg
+   496   0007C6  6E01               	movwf	data@a^0,c
+   497   0007C8                     
+   498                           ;driverkeypad2.c: 41: void data(unsigned char a);driverkeypad2.c: 42: {;driverkeypad2.c:
+      +                           43:     RC0=1;
+   499   0007C8  8082               	bsf	3970,0,c	;volatile
+   500                           
+   501                           ;driverkeypad2.c: 44:      RC1=0;
+   502   0007CA  9282               	bcf	3970,1,c	;volatile
+   503   0007CC                     
+   504                           ;driverkeypad2.c: 45:      PORTD=a;
+   505   0007CC  C001  FF83         	movff	data@a,3971	;volatile
+   506   0007D0                     
+   507                           ;driverkeypad2.c: 46:     RC2=1;
+   508   0007D0  8482               	bsf	3970,2,c	;volatile
+   509   0007D2                     
+   510                           ;driverkeypad2.c: 47:     for(int i=0;i<=100;i++);
+   511   0007D2  0E00               	movlw	0
+   512   0007D4  6E03               	movwf	(data@i+1)^0,c
+   513   0007D6  0E00               	movlw	0
+   514   0007D8  6E02               	movwf	data@i^0,c
+   515   0007DA                     l915:
+   516   0007DA  4A02               	infsnz	data@i^0,f,c
+   517   0007DC  2A03               	incf	(data@i+1)^0,f,c
+   518   0007DE  BE03               	btfsc	(data@i+1)^0,7,c
+   519   0007E0  EFFB  F003         	goto	u191
+   520   0007E4  5003               	movf	(data@i+1)^0,w,c
+   521   0007E6  E109               	bnz	u190
+   522   0007E8  0E65               	movlw	101
+   523   0007EA  5C02               	subwf	data@i^0,w,c
+   524   0007EC  A0D8               	btfss	status,0,c
+   525   0007EE  EFFB  F003         	goto	u191
+   526   0007F2  EFFD  F003         	goto	u190
+   527   0007F6                     u191:
+   528   0007F6  EFED  F003         	goto	l915
+   529   0007FA                     u190:
+   530   0007FA                     
+   531                           ;driverkeypad2.c: 48:     RC2=0;
+   532   0007FA  9482               	bcf	3970,2,c	;volatile
+   533   0007FC                     
+   534                           ;driverkeypad2.c: 49:     for(int i=0;i<=10000;i++);
+   535   0007FC  0E00               	movlw	0
+   536   0007FE  6E05               	movwf	(data@i_64+1)^0,c
+   537   000800  0E00               	movlw	0
+   538   000802  6E04               	movwf	data@i_64^0,c
+   539   000804                     l925:
+   540   000804  4A04               	infsnz	data@i_64^0,f,c
+   541   000806  2A05               	incf	(data@i_64+1)^0,f,c
+   542   000808  BE05               	btfsc	(data@i_64+1)^0,7,c
+   543   00080A  EF10  F004         	goto	u201
+   544   00080E  0E11               	movlw	17
+   545   000810  5C04               	subwf	data@i_64^0,w,c
+   546   000812  0E27               	movlw	39
+   547   000814  5805               	subwfb	(data@i_64+1)^0,w,c
+   548   000816  A0D8               	btfss	status,0,c
+   549   000818  EF10  F004         	goto	u201
+   550   00081C  EF12  F004         	goto	u200
+   551   000820                     u201:
+   552   000820  EF02  F004         	goto	l925
+   553   000824                     u200:
+   554   000824  0012               	return		;funcret
+   555   000826                     __end_of_data:
+   556                           	callstack 0
+   557                           
+   558 ;; *************** function _cmd *****************
+   559 ;; Defined at:
+   560 ;;		line 32 in file "driverkeypad2.c"
+   561 ;; Parameters:    Size  Location     Type
+   562 ;;  a               1    wreg     unsigned char 
+   563 ;; Auto vars:     Size  Location     Type
+   564 ;;  a               1    0[COMRAM] unsigned char 
+   565 ;;  i               2    3[COMRAM] int 
+   566 ;;  i               2    1[COMRAM] int 
+   567 ;; Return value:  Size  Location     Type
+   568 ;;                  1    wreg      void 
+   569 ;; Registers used:
+   570 ;;		wreg, status,2, status,0
+   571 ;; Tracked objects:
+   572 ;;		On entry : 0/0
+   573 ;;		On exit  : 0/0
+   574 ;;		Unchanged: 0/0
+   575 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   576 ;;      Params:         0       0       0       0       0       0       0
+   577 ;;      Locals:         5       0       0       0       0       0       0
+   578 ;;      Temps:          0       0       0       0       0       0       0
+   579 ;;      Totals:         5       0       0       0       0       0       0
+   580 ;;Total ram usage:        5 bytes
+   581 ;; Hardware stack levels used: 1
+   582 ;; This function calls:
+   583 ;;		Nothing
+   584 ;; This function is called by:
+   585 ;;		_main
+   586 ;; This function uses a non-reentrant model
+   587 ;;
+   588                           
+   589                           	psect	text3
+   590   000826                     __ptext3:
+   591                           	callstack 0
+   592   000826                     _cmd:
+   593                           	callstack 30
+   594                           
+   595                           ;incstack = 0
+   596                           ;cmd@a stored from wreg
+   597   000826  6E01               	movwf	cmd@a^0,c
+   598   000828                     
+   599                           ;driverkeypad2.c: 32: void cmd(unsigned char a);driverkeypad2.c: 33: {;driverkeypad2.c: 
+      +                          34:      RC0=RC1=0;
+   600   000828  9282               	bcf	3970,1,c	;volatile
+   601   00082A  9082               	bcf	3970,0,c	;volatile
+   602   00082C                     
+   603                           ;driverkeypad2.c: 35:     PORTD=a;
+   604   00082C  C001  FF83         	movff	cmd@a,3971	;volatile
+   605   000830                     
+   606                           ;driverkeypad2.c: 36:     RC2=1;
+   607   000830  8482               	bsf	3970,2,c	;volatile
+   608   000832                     
+   609                           ;driverkeypad2.c: 37:     for(int i=0;i<=100;i++);
+   610   000832  0E00               	movlw	0
+   611   000834  6E03               	movwf	(cmd@i+1)^0,c
+   612   000836  0E00               	movlw	0
+   613   000838  6E02               	movwf	cmd@i^0,c
+   614   00083A                     l785:
+   615   00083A  4A02               	infsnz	cmd@i^0,f,c
+   616   00083C  2A03               	incf	(cmd@i+1)^0,f,c
+   617   00083E  BE03               	btfsc	(cmd@i+1)^0,7,c
+   618   000840  EF2B  F004         	goto	u11
+   619   000844  5003               	movf	(cmd@i+1)^0,w,c
+   620   000846  E109               	bnz	u10
+   621   000848  0E65               	movlw	101
+   622   00084A  5C02               	subwf	cmd@i^0,w,c
+   623   00084C  A0D8               	btfss	status,0,c
+   624   00084E  EF2B  F004         	goto	u11
+   625   000852  EF2D  F004         	goto	u10
+   626   000856                     u11:
+   627   000856  EF1D  F004         	goto	l785
+   628   00085A                     u10:
+   629   00085A                     
+   630                           ;driverkeypad2.c: 38:     RC2=0;
+   631   00085A  9482               	bcf	3970,2,c	;volatile
+   632   00085C                     
+   633                           ;driverkeypad2.c: 39:      for(int i=0;i<=10000;i++);
+   634   00085C  0E00               	movlw	0
+   635   00085E  6E05               	movwf	(cmd@i_60+1)^0,c
+   636   000860  0E00               	movlw	0
+   637   000862  6E04               	movwf	cmd@i_60^0,c
+   638   000864                     l795:
+   639   000864  4A04               	infsnz	cmd@i_60^0,f,c
+   640   000866  2A05               	incf	(cmd@i_60+1)^0,f,c
+   641   000868  BE05               	btfsc	(cmd@i_60+1)^0,7,c
+   642   00086A  EF40  F004         	goto	u21
+   643   00086E  0E11               	movlw	17
+   644   000870  5C04               	subwf	cmd@i_60^0,w,c
+   645   000872  0E27               	movlw	39
+   646   000874  5805               	subwfb	(cmd@i_60+1)^0,w,c
+   647   000876  A0D8               	btfss	status,0,c
+   648   000878  EF40  F004         	goto	u21
+   649   00087C  EF42  F004         	goto	u20
+   650   000880                     u21:
+   651   000880  EF32  F004         	goto	l795
+   652   000884                     u20:
+   653   000884  0012               	return		;funcret
+   654   000886                     __end_of_cmd:
+   655                           	callstack 0
+   656                           
+   657                           	psect	smallconst
+   658   000600                     __psmallconst:
+   659                           	callstack 0
+   660   000600  00                 	db	0
+   661   000601  00                 	db	0	; dummy byte at the end
+   662   000000                     
+   663                           	psect	rparam
+   664   000000                     tosu	equ	0xFFF
+   665                           tosh	equ	0xFFE
+   666                           tosl	equ	0xFFD
+   667                           stkptr	equ	0xFFC
+   668                           pclatu	equ	0xFFB
+   669                           pclath	equ	0xFFA
+   670                           pcl	equ	0xFF9
+   671                           tblptru	equ	0xFF8
+   672                           tblptrh	equ	0xFF7
+   673                           tblptrl	equ	0xFF6
+   674                           tablat	equ	0xFF5
+   675                           prodh	equ	0xFF4
+   676                           prodl	equ	0xFF3
+   677                           indf0	equ	0xFEF
+   678                           postinc0	equ	0xFEE
+   679                           postdec0	equ	0xFED
+   680                           preinc0	equ	0xFEC
+   681                           plusw0	equ	0xFEB
+   682                           fsr0h	equ	0xFEA
+   683                           fsr0l	equ	0xFE9
+   684                           wreg	equ	0xFE8
+   685                           indf1	equ	0xFE7
+   686                           postinc1	equ	0xFE6
+   687                           postdec1	equ	0xFE5
+   688                           preinc1	equ	0xFE4
+   689                           plusw1	equ	0xFE3
+   690                           fsr1h	equ	0xFE2
+   691                           fsr1l	equ	0xFE1
+   692                           bsr	equ	0xFE0
+   693                           indf2	equ	0xFDF
+   694                           postinc2	equ	0xFDE
+   695                           postdec2	equ	0xFDD
+   696                           preinc2	equ	0xFDC
+   697                           plusw2	equ	0xFDB
+   698                           fsr2h	equ	0xFDA
+   699                           fsr2l	equ	0xFD9
+   700                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      6       6
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    _main->_cmd
+    _main->_data
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 1     1      0     165
+                                              5 COMRAM     1     1      0
+                                _cmd
+                               _data
+                             _keypad
+ ---------------------------------------------------------------------------------
+ (1) _keypad                                               0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _data                                                 5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ (1) _cmd                                                  5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 1
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _cmd
+   _data
+   _keypad
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      6       6       1        6.3%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBIGSFRh          3E      0       0      16        0.0%
+BITBIGSFRlh         2B      0       0      17        0.0%
+BITBIGSFRllh         F      0       0      18        0.0%
+BITBIGSFRlll       281      0       0      19        0.0%
+ABS                  0      0       0      20        0.0%
+BIGRAM             5FF      0       0      21        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Mon Aug 12 10:02:11 2024
+
+                     l50 0884                       l54 07FA                       l70 062E  
+                     l38 0786                       l47 085A                       l71 0656  
+                     l72 0642                       l57 0824                       l90 0752  
+                     l82 06C2                       l66 0602                       l91 072A  
+                     l75 066E                       l67 061A                       l84 06D6  
+                     l68 0756                       l93 073E                       l85 06FE  
+                     l77 0682                       l86 06EA                       l78 06AA  
+                     l79 0696                       l89 0716                       u10 085A  
+                     u11 0856                       u20 0884                       u21 0880  
+                     u30 0614                       u31 0610                       u40 0628  
+                     u41 0624                       u50 063C                       u51 0638  
+                     u60 0650                       u61 064C                       u70 0668  
+                     u71 0664                       u80 067C                       u81 0678  
+                     u90 0690                       u91 068C                      l801 0606  
+                    l803 0614                      l821 0650                      l903 07C8  
+                    l815 063C                      l905 07CC                      l841 0690  
+                    l825 0656                      l809 0628                      l915 07DA  
+                    l907 07D0                      l851 06AA                      l835 067C  
+                    l827 065A                      l931 0768                      l773 0828  
+                    l925 0804                      l917 07DE                      l909 07D2  
+                    l861 06D0                      l853 06AE                      l829 0668  
+                    l941 0794                      l933 076E                      l775 082C  
+                    l927 0808                      l919 07FC                      l855 06BC  
+                    l847 06A4                      l943 07A2                      l935 0774  
+                    l785 083A                      l777 0830                      l881 0710  
+                    l873 06F8                      l945 07B0                      l937 077A  
+                    l929 0758                      l795 0864                      l787 083E  
+                    l779 0832                      l867 06E4                      l939 0780  
+                    l797 0868                      l789 085C                      l893 0738  
+                    l877 06FE                      l887 0724                      l879 0702  
+                    l799 0602                      l899 074C                      _RC0 7C10  
+                    _RC1 7C11                      _RB4 7C0C                      _RC2 7C12  
+                    _RB5 7C0D                      _RB6 7C0E                      _RB7 7C0F  
+                    u100 06A4                      u101 06A0                      u110 06BC  
+                    u111 06B8                      u200 0824                      u120 06D0  
+                    u201 0820                      u121 06CC                      u130 06E4  
+                    u210 0794                      u131 06E0                      u211 0790  
+                    u140 06F8                      u220 07A2                      u141 06F4  
+                    u221 079E                      u150 0710                      u230 07B0  
+                    u151 070C                      u231 07AC                      u160 0724  
+                    u240 07BE                      u161 0720                      u241 07BA  
+                    u170 0738                      u171 0734                      u180 074C  
+                    u181 0748                      u190 07FA                      u191 07F6  
+                    _cmd 0826                     ?_cmd 0001                     _data 07C6  
+                   cmd@a 0001                     cmd@i 0002                     _main 0758  
+                   start 0000             ___param_bank 0000                    ??_cmd 0001  
+                  ?_data 0001                    ?_main 0001                    _PORTB 0F81  
+                  _PORTD 0F83                    _TRISB 0F93                    _TRISC 0F94  
+                  _TRISD 0F95                    data@a 0001                    data@i 0002  
+                  main@a 0006                    status 0FD8          __initialization 0886  
+           __end_of_data 0826             __end_of_main 07C6                   ??_data 0001  
+                 ??_main 0006            __activetblptr 0000                   _ADCON1 0FC1  
+                 _keypad 0602                   isa$std 0001             __mediumconst 0000  
+             __accesstop 0060  __end_of__initialization 0886            ___rparam_used 0001  
+         __pcstackCOMRAM 0001                  ?_keypad 0001                  __Hparam 0000  
+                __Lparam 0000             __psmallconst 0600                  __pcinit 0886  
+                __ramtop 0600                  __ptext0 0758                  cmd@i_60 0004  
+                __ptext1 0602                  __ptext2 07C6                  __ptext3 0826  
+   end_of_initialization 0886           __end_of_keypad 0758      start_initialization 0886  
+            __end_of_cmd 0886                 ??_keypad 0001              __smallconst 0600  
+               __Hrparam 0000                 __Lrparam 0000                 data@i_64 0004  
+               isa$xinst 0000  

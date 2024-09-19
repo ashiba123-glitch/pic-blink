@@ -1,0 +1,452 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Mon Aug 05 18:23:05 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     8                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+     9                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    10                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    11   000000                     
+    12                           ; Generated 17/10/2023 GMT
+    13                           ; 
+    14                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    15                           ; All rights reserved.
+    16                           ; 
+    17                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    18                           ; 
+    19                           ; Redistribution and use in source and binary forms, with or without modification, are
+    20                           ; permitted provided that the following conditions are met:
+    21                           ; 
+    22                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    23                           ;        conditions and the following disclaimer.
+    24                           ; 
+    25                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    26                           ;        of conditions and the following disclaimer in the documentation and/or other
+    27                           ;        materials provided with the distribution. Publication is not required when
+    28                           ;        this file is used in an embedded application.
+    29                           ; 
+    30                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    31                           ;        software without specific prior written permission.
+    32                           ; 
+    33                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    34                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    35                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    36                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    37                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    38                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    39                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    40                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    41                           ; 
+    42                           ; 
+    43                           ; Code-generator required, PIC18F4580 Definitions
+    44                           ; 
+    45                           ; SFR Addresses
+    46   000000                     _RC5	set	31765
+    47   000000                     _RC4	set	31764
+    48   000000                     _RC1	set	31761
+    49   000000                     _RC3	set	31763
+    50   000000                     _RC2	set	31762
+    51   000000                     _TRISC	set	3988
+    52   000000                     _RC0	set	31760
+    53                           
+    54                           ; #config settings
+    55                           
+    56                           	psect	cinit
+    57   000722                     __pcinit:
+    58                           	callstack 0
+    59   000722                     start_initialization:
+    60                           	callstack 0
+    61   000722                     __initialization:
+    62                           	callstack 0
+    63   000722                     end_of_initialization:
+    64                           	callstack 0
+    65   000722                     __end_of__initialization:
+    66                           	callstack 0
+    67   000722  0100               	movlb	0
+    68   000724  EF01  F003         	goto	_main	;jump to C main() function
+    69                           
+    70                           	psect	cstackCOMRAM
+    71   000001                     __pcstackCOMRAM:
+    72                           	callstack 0
+    73   000001                     main@c1:
+    74                           	callstack 0
+    75                           
+    76                           ; 2 bytes @ 0x0
+    77   000001                     	ds	2
+    78   000003                     main@c2:
+    79                           	callstack 0
+    80                           
+    81                           ; 2 bytes @ 0x2
+    82   000003                     	ds	2
+    83                           
+    84 ;;
+    85 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+    86 ;;
+    87 ;; *************** function _main *****************
+    88 ;; Defined at:
+    89 ;;		line 10 in file "2MOTOR.c"
+    90 ;; Parameters:    Size  Location     Type
+    91 ;;		None
+    92 ;; Auto vars:     Size  Location     Type
+    93 ;;  c2              2    2[COMRAM] int 
+    94 ;;  c1              2    0[COMRAM] int 
+    95 ;; Return value:  Size  Location     Type
+    96 ;;                  1    wreg      void 
+    97 ;; Registers used:
+    98 ;;		wreg, status,2, status,0
+    99 ;; Tracked objects:
+   100 ;;		On entry : 0/0
+   101 ;;		On exit  : 0/0
+   102 ;;		Unchanged: 0/0
+   103 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   104 ;;      Params:         0       0       0       0       0       0       0
+   105 ;;      Locals:         4       0       0       0       0       0       0
+   106 ;;      Temps:          0       0       0       0       0       0       0
+   107 ;;      Totals:         4       0       0       0       0       0       0
+   108 ;;Total ram usage:        4 bytes
+   109 ;; This function calls:
+   110 ;;		Nothing
+   111 ;; This function is called by:
+   112 ;;		Startup code after reset
+   113 ;; This function uses a non-reentrant model
+   114 ;;
+   115                           
+   116                           	psect	text0
+   117   000602                     __ptext0:
+   118                           	callstack 0
+   119   000602                     _main:
+   120                           	callstack 31
+   121   000602  0E03               	movlw	3
+   122   000604  6E94               	movwf	148,c	;volatile
+   123   000606  6801               	setf	main@c1^0,c
+   124   000608  6802               	setf	(main@c1+1)^0,c
+   125   00060A  6803               	setf	main@c2^0,c
+   126   00060C  6804               	setf	(main@c2+1)^0,c
+   127   00060E                     l724:
+   128   00060E  A082               	btfss	3970,0,c	;volatile
+   129   000610  EF0C  F003         	goto	u11
+   130   000614  EF0E  F003         	goto	u10
+   131   000618                     u11:
+   132   000618  EF49  F003         	goto	l20
+   133   00061C                     u10:
+   134   00061C  0E02               	movlw	2
+   135   00061E  1801               	xorwf	main@c1^0,w,c
+   136   000620  1002               	iorwf	(main@c1+1)^0,w,c
+   137   000622  A4D8               	btfss	status,2,c
+   138   000624  EF16  F003         	goto	u21
+   139   000628  EF18  F003         	goto	u20
+   140   00062C                     u21:
+   141   00062C  EF1A  F003         	goto	l730
+   142   000630                     u20:
+   143   000630  6801               	setf	main@c1^0,c
+   144   000632  6802               	setf	(main@c1+1)^0,c
+   145   000634                     l730:
+   146   000634  4A01               	infsnz	main@c1^0,f,c
+   147   000636  2A02               	incf	(main@c1+1)^0,f,c
+   148   000638                     l22:
+   149   000638  B082               	btfsc	3970,0,c	;volatile
+   150   00063A  EF21  F003         	goto	u31
+   151   00063E  EF23  F003         	goto	u30
+   152   000642                     u31:
+   153   000642  EF1C  F003         	goto	l22
+   154   000646                     u30:
+   155   000646  5001               	movf	main@c1^0,w,c
+   156   000648  1002               	iorwf	(main@c1+1)^0,w,c
+   157   00064A  A4D8               	btfss	status,2,c
+   158   00064C  EF2A  F003         	goto	u41
+   159   000650  EF2C  F003         	goto	u40
+   160   000654                     u41:
+   161   000654  EF30  F003         	goto	l736
+   162   000658                     u40:
+   163   000658  8482               	bsf	3970,2,c	;volatile
+   164   00065A  9682               	bcf	3970,3,c	;volatile
+   165   00065C  EF49  F003         	goto	l20
+   166   000660                     l736:
+   167   000660  0401               	decf	main@c1^0,w,c
+   168   000662  1002               	iorwf	(main@c1+1)^0,w,c
+   169   000664  A4D8               	btfss	status,2,c
+   170   000666  EF37  F003         	goto	u51
+   171   00066A  EF39  F003         	goto	u50
+   172   00066E                     u51:
+   173   00066E  EF3D  F003         	goto	l740
+   174   000672                     u50:
+   175   000672  9482               	bcf	3970,2,c	;volatile
+   176   000674  8682               	bsf	3970,3,c	;volatile
+   177   000676  EF49  F003         	goto	l20
+   178   00067A                     l740:
+   179   00067A  0E02               	movlw	2
+   180   00067C  1801               	xorwf	main@c1^0,w,c
+   181   00067E  1002               	iorwf	(main@c1+1)^0,w,c
+   182   000680  A4D8               	btfss	status,2,c
+   183   000682  EF45  F003         	goto	u61
+   184   000686  EF47  F003         	goto	u60
+   185   00068A                     u61:
+   186   00068A  EF49  F003         	goto	l20
+   187   00068E                     u60:
+   188   00068E  9482               	bcf	3970,2,c	;volatile
+   189   000690  9682               	bcf	3970,3,c	;volatile
+   190   000692                     l20:
+   191   000692  A282               	btfss	3970,1,c	;volatile
+   192   000694  EF4E  F003         	goto	u71
+   193   000698  EF50  F003         	goto	u70
+   194   00069C                     u71:
+   195   00069C  EF07  F003         	goto	l724
+   196   0006A0                     u70:
+   197   0006A0  0E02               	movlw	2
+   198   0006A2  1803               	xorwf	main@c2^0,w,c
+   199   0006A4  1004               	iorwf	(main@c2+1)^0,w,c
+   200   0006A6  A4D8               	btfss	status,2,c
+   201   0006A8  EF58  F003         	goto	u81
+   202   0006AC  EF5A  F003         	goto	u80
+   203   0006B0                     u81:
+   204   0006B0  EF5C  F003         	goto	l748
+   205   0006B4                     u80:
+   206   0006B4  6803               	setf	main@c2^0,c
+   207   0006B6  6804               	setf	(main@c2+1)^0,c
+   208   0006B8                     l748:
+   209   0006B8  4A03               	infsnz	main@c2^0,f,c
+   210   0006BA  2A04               	incf	(main@c2+1)^0,f,c
+   211   0006BC                     l32:
+   212   0006BC  B282               	btfsc	3970,1,c	;volatile
+   213   0006BE  EF63  F003         	goto	u91
+   214   0006C2  EF65  F003         	goto	u90
+   215   0006C6                     u91:
+   216   0006C6  EF5E  F003         	goto	l32
+   217   0006CA                     u90:
+   218   0006CA  5003               	movf	main@c2^0,w,c
+   219   0006CC  1004               	iorwf	(main@c2+1)^0,w,c
+   220   0006CE  A4D8               	btfss	status,2,c
+   221   0006D0  EF6C  F003         	goto	u101
+   222   0006D4  EF6E  F003         	goto	u100
+   223   0006D8                     u101:
+   224   0006D8  EF72  F003         	goto	l754
+   225   0006DC                     u100:
+   226   0006DC  8882               	bsf	3970,4,c	;volatile
+   227   0006DE  9A82               	bcf	3970,5,c	;volatile
+   228   0006E0  EF07  F003         	goto	l724
+   229   0006E4                     l754:
+   230   0006E4  0403               	decf	main@c2^0,w,c
+   231   0006E6  1004               	iorwf	(main@c2+1)^0,w,c
+   232   0006E8  A4D8               	btfss	status,2,c
+   233   0006EA  EF79  F003         	goto	u111
+   234   0006EE  EF7B  F003         	goto	u110
+   235   0006F2                     u111:
+   236   0006F2  EF7F  F003         	goto	l758
+   237   0006F6                     u110:
+   238   0006F6  9882               	bcf	3970,4,c	;volatile
+   239   0006F8  8A82               	bsf	3970,5,c	;volatile
+   240   0006FA  EF07  F003         	goto	l724
+   241   0006FE                     l758:
+   242   0006FE  0E02               	movlw	2
+   243   000700  1803               	xorwf	main@c2^0,w,c
+   244   000702  1004               	iorwf	(main@c2+1)^0,w,c
+   245   000704  A4D8               	btfss	status,2,c
+   246   000706  EF87  F003         	goto	u121
+   247   00070A  EF89  F003         	goto	u120
+   248   00070E                     u121:
+   249   00070E  EF8D  F003         	goto	l30
+   250   000712                     u120:
+   251   000712  9882               	bcf	3970,4,c	;volatile
+   252   000714  9A82               	bcf	3970,5,c	;volatile
+   253   000716  EF07  F003         	goto	l724
+   254   00071A                     l30:
+   255   00071A  EF07  F003         	goto	l724
+   256   00071E  EF00  F000         	goto	start
+   257   000722                     __end_of_main:
+   258                           	callstack 0
+   259                           
+   260                           	psect	smallconst
+   261   000600                     __psmallconst:
+   262                           	callstack 0
+   263   000600  00                 	db	0
+   264   000601  00                 	db	0	; dummy byte at the end
+   265   000000                     
+   266                           	psect	rparam
+   267   000000                     tosu	equ	0xFFF
+   268                           tosh	equ	0xFFE
+   269                           tosl	equ	0xFFD
+   270                           stkptr	equ	0xFFC
+   271                           pclatu	equ	0xFFB
+   272                           pclath	equ	0xFFA
+   273                           pcl	equ	0xFF9
+   274                           tblptru	equ	0xFF8
+   275                           tblptrh	equ	0xFF7
+   276                           tblptrl	equ	0xFF6
+   277                           tablat	equ	0xFF5
+   278                           prodh	equ	0xFF4
+   279                           prodl	equ	0xFF3
+   280                           indf0	equ	0xFEF
+   281                           postinc0	equ	0xFEE
+   282                           postdec0	equ	0xFED
+   283                           preinc0	equ	0xFEC
+   284                           plusw0	equ	0xFEB
+   285                           fsr0h	equ	0xFEA
+   286                           fsr0l	equ	0xFE9
+   287                           wreg	equ	0xFE8
+   288                           indf1	equ	0xFE7
+   289                           postinc1	equ	0xFE6
+   290                           postdec1	equ	0xFE5
+   291                           preinc1	equ	0xFE4
+   292                           plusw1	equ	0xFE3
+   293                           fsr1h	equ	0xFE2
+   294                           fsr1l	equ	0xFE1
+   295                           bsr	equ	0xFE0
+   296                           indf2	equ	0xFDF
+   297                           postinc2	equ	0xFDE
+   298                           postdec2	equ	0xFDD
+   299                           preinc2	equ	0xFDC
+   300                           plusw2	equ	0xFDB
+   301                           fsr2h	equ	0xFDA
+   302                           fsr2l	equ	0xFD9
+   303                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      4       4
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    None.
+
+Critical Paths under _main in COMRAM
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     4      0     120
+                                              0 COMRAM     4     4      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 0
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      4       4       1        4.2%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBIGSFRh          6B      0       0      16        0.0%
+BITBIGSFRlh         11      0       0      17        0.0%
+BITBIGSFRll        282      0       0      18        0.0%
+ABS                  0      0       0      19        0.0%
+BIGRAM             5FF      0       0      20        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Mon Aug 05 18:23:05 2024
+
+                     l20 0692                       l30 071A                       l22 0638  
+                     l32 06BC                       u10 061C                       u11 0618  
+                     u20 0630                       u21 062C                       u30 0646  
+                     u31 0642                       u40 0658                       u41 0654  
+                     u50 0672                       u51 066E                       u60 068E  
+                     u61 068A                       u70 06A0                       u71 069C  
+                     u80 06B4                       u81 06B0                       u90 06CA  
+                     u91 06C6                      l720 0606                      l730 0634  
+                    l722 060A                      l740 067A                      l732 0646  
+                    l724 060E                      l750 06CA                      l742 068E  
+                    l734 0658                      l726 061C                      l718 0602  
+                    l760 0712                      l752 06DC                      l744 06A0  
+                    l736 0660                      l728 0630                      l754 06E4  
+                    l746 06B4                      l738 0672                      l756 06F6  
+                    l748 06B8                      l758 06FE                      _RC0 7C10  
+                    _RC1 7C11                      _RC2 7C12                      _RC3 7C13  
+                    _RC4 7C14                      _RC5 7C15                      u100 06DC  
+                    u101 06D8                      u110 06F6                      u111 06F2  
+                    u120 0712                      u121 070E                     _main 0602  
+                   start 0000             ___param_bank 0000                    ?_main 0001  
+                  _TRISC 0F94                    status 0FD8          __initialization 0722  
+           __end_of_main 0722                   ??_main 0001            __activetblptr 0000  
+                 isa$std 0001                   main@c1 0001                   main@c2 0003  
+           __mediumconst 0000               __accesstop 0060  __end_of__initialization 0722  
+          ___rparam_used 0001           __pcstackCOMRAM 0001                  __Hparam 0000  
+                __Lparam 0000             __psmallconst 0600                  __pcinit 0722  
+                __ramtop 0600                  __ptext0 0602     end_of_initialization 0722  
+    start_initialization 0722              __smallconst 0600                 __Hrparam 0000  
+               __Lrparam 0000                 isa$xinst 0000  

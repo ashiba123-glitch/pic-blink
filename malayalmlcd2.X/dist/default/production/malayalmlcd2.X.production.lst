@@ -1,0 +1,897 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Tue Aug 20 20:23:31 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	idataCOMRAM,global,class=CODE,delta=1,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	dataCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     9                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    13                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+    14                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    15                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    16   000000                     
+    17                           ; Generated 17/10/2023 GMT
+    18                           ; 
+    19                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    20                           ; All rights reserved.
+    21                           ; 
+    22                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    23                           ; 
+    24                           ; Redistribution and use in source and binary forms, with or without modification, are
+    25                           ; permitted provided that the following conditions are met:
+    26                           ; 
+    27                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    28                           ;        conditions and the following disclaimer.
+    29                           ; 
+    30                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    31                           ;        of conditions and the following disclaimer in the documentation and/or other
+    32                           ;        materials provided with the distribution. Publication is not required when
+    33                           ;        this file is used in an embedded application.
+    34                           ; 
+    35                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    36                           ;        software without specific prior written permission.
+    37                           ; 
+    38                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    39                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    40                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    41                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    42                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    43                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    44                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    45                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    46                           ; 
+    47                           ; 
+    48                           ; Code-generator required, PIC18F4580 Definitions
+    49                           ; 
+    50                           ; SFR Addresses
+    51   000000                     
+    52                           	psect	idataCOMRAM
+    53   0007AA                     __pidataCOMRAM:
+    54                           	callstack 0
+    55                           
+    56                           ;initializer for _char_ba2
+    57   0007AA  19                 	db	25
+    58   0007AB  09                 	db	9
+    59   0007AC  09                 	db	9
+    60   0007AD  09                 	db	9
+    61   0007AE  09                 	db	9
+    62   0007AF  0F                 	db	15
+    63   0007B0  00                 	db	0
+    64   0007B1  00                 	db	0
+    65                           
+    66                           ;initializer for _char_ba1
+    67   0007B2  1E                 	db	30
+    68   0007B3  11                 	db	17
+    69   0007B4  11                 	db	17
+    70   0007B5  1D                 	db	29
+    71   0007B6  15                 	db	21
+    72   0007B7  1D                 	db	29
+    73   0007B8  00                 	db	0
+    74   0007B9  00                 	db	0
+    75                           
+    76                           ;initializer for _char_shi
+    77   0007BA  1E                 	db	30
+    78   0007BB  02                 	db	2
+    79   0007BC  02                 	db	2
+    80   0007BD  02                 	db	2
+    81   0007BE  02                 	db	2
+    82   0007BF  02                 	db	2
+    83   0007C0  00                 	db	0
+    84   0007C1  00                 	db	0
+    85                           
+    86                           ;initializer for _char_sh2
+    87   0007C2  1C                 	db	28
+    88   0007C3  14                 	db	20
+    89   0007C4  1F                 	db	31
+    90   0007C5  05                 	db	5
+    91   0007C6  05                 	db	5
+    92   0007C7  1F                 	db	31
+    93   0007C8  00                 	db	0
+    94   0007C9  00                 	db	0
+    95                           
+    96                           ;initializer for _char_sh1
+    97   0007CA  00                 	db	0
+    98   0007CB  00                 	db	0
+    99   0007CC  00                 	db	0
+   100   0007CD  1C                 	db	28
+   101   0007CE  14                 	db	20
+   102   0007CF  17                 	db	23
+   103   0007D0  00                 	db	0
+   104   0007D1  00                 	db	0
+   105                           
+   106                           ;initializer for _char_a2
+   107   0007D2  1E                 	db	30
+   108   0007D3  12                 	db	18
+   109   0007D4  1E                 	db	30
+   110   0007D5  1B                 	db	27
+   111   0007D6  1F                 	db	31
+   112   0007D7  11                 	db	17
+   113   0007D8  07                 	db	7
+   114   0007D9  00                 	db	0
+   115                           
+   116                           ;initializer for _char_a1
+   117   0007DA  1F                 	db	31
+   118   0007DB  17                 	db	23
+   119   0007DC  15                 	db	21
+   120   0007DD  17                 	db	23
+   121   0007DE  15                 	db	21
+   122   0007DF  17                 	db	23
+   123   0007E0  00                 	db	0
+   124   0007E1  00                 	db	0
+   125   000000                     _RC2	set	31762
+   126   000000                     _RC1	set	31761
+   127   000000                     _TRISC	set	3988
+   128   000000                     _RC0	set	31760
+   129   000000                     _TRISD	set	3989
+   130   000000                     _PORTD	set	3971
+   131                           
+   132                           ; #config settings
+   133                           
+   134                           	psect	cinit
+   135   0007E2                     __pcinit:
+   136                           	callstack 0
+   137   0007E2                     start_initialization:
+   138                           	callstack 0
+   139   0007E2                     __initialization:
+   140                           	callstack 0
+   141                           
+   142                           ; Initialize objects allocated to COMRAM (56 bytes)
+   143                           ; load TBLPTR registers with __pidataCOMRAM
+   144   0007E2  0EAA               	movlw	low __pidataCOMRAM
+   145   0007E4  6EF6               	movwf	tblptrl,c
+   146   0007E6  0E07               	movlw	high __pidataCOMRAM
+   147   0007E8  6EF7               	movwf	tblptrh,c
+   148   0007EA  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
+   149   0007EC  6EF8               	movwf	tblptru,c
+   150   0007EE  EE00  F001         	lfsr	0,__pdataCOMRAM
+   151   0007F2  EE10 F038          	lfsr	1,56
+   152   0007F6                     copy_data0:
+   153   0007F6  0009               	tblrd		*+
+   154   0007F8  CFF5 FFEE          	movff	tablat,postinc0
+   155   0007FC  50E5               	movf	postdec1,w,c
+   156   0007FE  50E1               	movf	fsr1l,w,c
+   157   000800  E1FA               	bnz	copy_data0
+   158   000802                     end_of_initialization:
+   159                           	callstack 0
+   160   000802                     __end_of__initialization:
+   161                           	callstack 0
+   162   000802  0100               	movlb	0
+   163   000804  EF01  F003         	goto	_main	;jump to C main() function
+   164                           
+   165                           	psect	dataCOMRAM
+   166   000001                     __pdataCOMRAM:
+   167                           	callstack 0
+   168   000001                     _char_ba2:
+   169                           	callstack 0
+   170   000001                     	ds	8
+   171   000009                     _char_ba1:
+   172                           	callstack 0
+   173   000009                     	ds	8
+   174   000011                     _char_shi:
+   175                           	callstack 0
+   176   000011                     	ds	8
+   177   000019                     _char_sh2:
+   178                           	callstack 0
+   179   000019                     	ds	8
+   180   000021                     _char_sh1:
+   181                           	callstack 0
+   182   000021                     	ds	8
+   183   000029                     _char_a2:
+   184                           	callstack 0
+   185   000029                     	ds	8
+   186   000031                     _char_a1:
+   187                           	callstack 0
+   188   000031                     	ds	8
+   189                           
+   190                           	psect	cstackCOMRAM
+   191   000039                     __pcstackCOMRAM:
+   192                           	callstack 0
+   193   000039                     cmd@a:
+   194                           	callstack 0
+   195   000039                     data@a:
+   196                           	callstack 0
+   197                           
+   198                           ; 1 bytes @ 0x0
+   199   000039                     	ds	1
+   200   00003A                     cmd@i:
+   201                           	callstack 0
+   202   00003A                     data@i:
+   203                           	callstack 0
+   204                           
+   205                           ; 2 bytes @ 0x1
+   206   00003A                     	ds	2
+   207   00003C                     cmd@i_61:
+   208                           	callstack 0
+   209   00003C                     data@i_65:
+   210                           	callstack 0
+   211                           
+   212                           ; 2 bytes @ 0x3
+   213   00003C                     	ds	2
+   214   00003E                     createCustomChar@pattern:
+   215                           	callstack 0
+   216                           
+   217                           ; 1 bytes @ 0x5
+   218   00003E                     	ds	1
+   219   00003F                     createCustomChar@location:
+   220                           	callstack 0
+   221                           
+   222                           ; 1 bytes @ 0x6
+   223   00003F                     	ds	1
+   224   000040                     createCustomChar@i:
+   225                           	callstack 0
+   226                           
+   227                           ; 2 bytes @ 0x7
+   228   000040                     	ds	2
+   229   000042                     
+   230                           ; 1 bytes @ 0x9
+   231 ;;
+   232 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   233 ;;
+   234 ;; *************** function _main *****************
+   235 ;; Defined at:
+   236 ;;		line 89 in file "malayalmlcd2.c"
+   237 ;; Parameters:    Size  Location     Type
+   238 ;;		None
+   239 ;; Auto vars:     Size  Location     Type
+   240 ;;		None
+   241 ;; Return value:  Size  Location     Type
+   242 ;;                  1    wreg      void 
+   243 ;; Registers used:
+   244 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+   245 ;; Tracked objects:
+   246 ;;		On entry : 0/0
+   247 ;;		On exit  : 0/0
+   248 ;;		Unchanged: 0/0
+   249 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   250 ;;      Params:         0       0       0       0       0       0       0
+   251 ;;      Locals:         0       0       0       0       0       0       0
+   252 ;;      Temps:          0       0       0       0       0       0       0
+   253 ;;      Totals:         0       0       0       0       0       0       0
+   254 ;;Total ram usage:        0 bytes
+   255 ;; Hardware stack levels required when called: 2
+   256 ;; This function calls:
+   257 ;;		_cmd
+   258 ;;		_createCustomChar
+   259 ;;		_data
+   260 ;; This function is called by:
+   261 ;;		Startup code after reset
+   262 ;; This function uses a non-reentrant model
+   263 ;;
+   264                           
+   265                           	psect	text0
+   266   000602                     __ptext0:
+   267                           	callstack 0
+   268   000602                     _main:
+   269                           	callstack 29
+   270   000602                     
+   271                           ;malayalmlcd2.c: 90:     TRISC = TRISD = 0x00;
+   272   000602  0E00               	movlw	0
+   273   000604  6E95               	movwf	149,c	;volatile
+   274   000606  CF95 FF94          	movff	3989,3988	;volatile
+   275   00060A                     
+   276                           ;malayalmlcd2.c: 91:     cmd(0x01);
+   277   00060A  0E01               	movlw	1
+   278   00060C  EC7A  F003         	call	_cmd
+   279   000610                     
+   280                           ;malayalmlcd2.c: 92:     cmd(0x0F);
+   281   000610  0E0F               	movlw	15
+   282   000612  EC7A  F003         	call	_cmd
+   283   000616                     
+   284                           ;malayalmlcd2.c: 94:     createCustomChar(0, char_a1);
+   285   000616  0E31               	movlw	low _char_a1
+   286   000618  6E3E               	movwf	createCustomChar@pattern^0,c
+   287   00061A  0E00               	movlw	0
+   288   00061C  ECAA  F003         	call	_createCustomChar
+   289   000620                     
+   290                           ;malayalmlcd2.c: 95:     createCustomChar(1, char_a2);
+   291   000620  0E29               	movlw	low _char_a2
+   292   000622  6E3E               	movwf	createCustomChar@pattern^0,c
+   293   000624  0E01               	movlw	1
+   294   000626  ECAA  F003         	call	_createCustomChar
+   295   00062A                     
+   296                           ;malayalmlcd2.c: 96:     createCustomChar(2, char_sh1);
+   297   00062A  0E21               	movlw	low _char_sh1
+   298   00062C  6E3E               	movwf	createCustomChar@pattern^0,c
+   299   00062E  0E02               	movlw	2
+   300   000630  ECAA  F003         	call	_createCustomChar
+   301   000634                     
+   302                           ;malayalmlcd2.c: 97:     createCustomChar(3, char_sh2);
+   303   000634  0E19               	movlw	low _char_sh2
+   304   000636  6E3E               	movwf	createCustomChar@pattern^0,c
+   305   000638  0E03               	movlw	3
+   306   00063A  ECAA  F003         	call	_createCustomChar
+   307   00063E                     
+   308                           ;malayalmlcd2.c: 98:     createCustomChar(4, char_shi);
+   309   00063E  0E11               	movlw	low _char_shi
+   310   000640  6E3E               	movwf	createCustomChar@pattern^0,c
+   311   000642  0E04               	movlw	4
+   312   000644  ECAA  F003         	call	_createCustomChar
+   313   000648                     
+   314                           ;malayalmlcd2.c: 99:     createCustomChar(5, char_ba1);
+   315   000648  0E09               	movlw	low _char_ba1
+   316   00064A  6E3E               	movwf	createCustomChar@pattern^0,c
+   317   00064C  0E05               	movlw	5
+   318   00064E  ECAA  F003         	call	_createCustomChar
+   319   000652                     
+   320                           ;malayalmlcd2.c: 100:     createCustomChar(6, char_ba2);
+   321   000652  0E01               	movlw	low _char_ba2
+   322   000654  6E3E               	movwf	createCustomChar@pattern^0,c
+   323   000656  0E06               	movlw	6
+   324   000658  ECAA  F003         	call	_createCustomChar
+   325   00065C                     
+   326                           ;malayalmlcd2.c: 103:     cmd(0x80);
+   327   00065C  0E80               	movlw	128
+   328   00065E  EC7A  F003         	call	_cmd
+   329   000662                     
+   330                           ;malayalmlcd2.c: 105:     data(0x00);
+   331   000662  0E00               	movlw	0
+   332   000664  EC4A  F003         	call	_data
+   333   000668                     
+   334                           ;malayalmlcd2.c: 106:     data(0x01);
+   335   000668  0E01               	movlw	1
+   336   00066A  EC4A  F003         	call	_data
+   337   00066E                     
+   338                           ;malayalmlcd2.c: 107:     data(0x02);
+   339   00066E  0E02               	movlw	2
+   340   000670  EC4A  F003         	call	_data
+   341   000674                     
+   342                           ;malayalmlcd2.c: 108:     data(0x03);
+   343   000674  0E03               	movlw	3
+   344   000676  EC4A  F003         	call	_data
+   345   00067A                     
+   346                           ;malayalmlcd2.c: 109:     data(0x04);
+   347   00067A  0E04               	movlw	4
+   348   00067C  EC4A  F003         	call	_data
+   349   000680                     
+   350                           ;malayalmlcd2.c: 110:     data(0x05);
+   351   000680  0E05               	movlw	5
+   352   000682  EC4A  F003         	call	_data
+   353   000686                     
+   354                           ;malayalmlcd2.c: 111:     data(0x06);
+   355   000686  0E06               	movlw	6
+   356   000688  EC4A  F003         	call	_data
+   357   00068C                     l37:
+   358   00068C  EF46  F003         	goto	l37
+   359   000690  EF00  F000         	goto	start
+   360   000694                     __end_of_main:
+   361                           	callstack 0
+   362                           
+   363 ;; *************** function _createCustomChar *****************
+   364 ;; Defined at:
+   365 ;;		line 144 in file "malayalmlcd2.c"
+   366 ;; Parameters:    Size  Location     Type
+   367 ;;  location        1    wreg     unsigned char 
+   368 ;;  pattern         1    5[COMRAM] PTR unsigned char 
+   369 ;;		 -> char_ba2(8), char_ba1(8), char_shi(8), char_sh2(8), 
+   370 ;;		 -> char_sh1(8), char_a2(8), char_a1(8), 
+   371 ;; Auto vars:     Size  Location     Type
+   372 ;;  location        1    6[COMRAM] unsigned char 
+   373 ;;  i               2    7[COMRAM] int 
+   374 ;; Return value:  Size  Location     Type
+   375 ;;                  1    wreg      void 
+   376 ;; Registers used:
+   377 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+   378 ;; Tracked objects:
+   379 ;;		On entry : 0/0
+   380 ;;		On exit  : 0/0
+   381 ;;		Unchanged: 0/0
+   382 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   383 ;;      Params:         1       0       0       0       0       0       0
+   384 ;;      Locals:         3       0       0       0       0       0       0
+   385 ;;      Temps:          0       0       0       0       0       0       0
+   386 ;;      Totals:         4       0       0       0       0       0       0
+   387 ;;Total ram usage:        4 bytes
+   388 ;; Hardware stack levels used: 1
+   389 ;; Hardware stack levels required when called: 1
+   390 ;; This function calls:
+   391 ;;		_cmd
+   392 ;;		_data
+   393 ;; This function is called by:
+   394 ;;		_main
+   395 ;; This function uses a non-reentrant model
+   396 ;;
+   397                           
+   398                           	psect	text1
+   399   000754                     __ptext1:
+   400                           	callstack 0
+   401   000754                     _createCustomChar:
+   402                           	callstack 29
+   403                           
+   404                           ;incstack = 0
+   405                           ;createCustomChar@location stored from wreg
+   406   000754  6E3F               	movwf	createCustomChar@location^0,c
+   407   000756                     
+   408                           ;malayalmlcd2.c: 145:     if (location < 8) {
+   409   000756  0E08               	movlw	8
+   410   000758  603F               	cpfslt	createCustomChar@location^0,c
+   411   00075A  EFB1  F003         	goto	u81
+   412   00075E  EFB3  F003         	goto	u80
+   413   000762                     u81:
+   414   000762  EFD4  F003         	goto	l66
+   415   000766                     u80:
+   416   000766                     
+   417                           ;malayalmlcd2.c: 146:         cmd(0x40 + (location * 8));
+   418   000766  503F               	movf	createCustomChar@location^0,w,c
+   419   000768  0D08               	mullw	8
+   420   00076A  50F3               	movf	243,w,c
+   421   00076C  0F40               	addlw	64
+   422   00076E  EC7A  F003         	call	_cmd
+   423   000772                     
+   424                           ;malayalmlcd2.c: 147:         for(int i = 0; i < 8; i++) {
+   425   000772  0E00               	movlw	0
+   426   000774  6E41               	movwf	(createCustomChar@i+1)^0,c
+   427   000776  0E00               	movlw	0
+   428   000778  6E40               	movwf	createCustomChar@i^0,c
+   429   00077A                     l864:
+   430                           
+   431                           ;malayalmlcd2.c: 148:             data(pattern[i]);
+   432   00077A  503E               	movf	createCustomChar@pattern^0,w,c
+   433   00077C  2440               	addwf	createCustomChar@i^0,w,c
+   434   00077E  6ED9               	movwf	fsr2l,c
+   435   000780  6ADA               	clrf	fsr2h,c
+   436   000782  50DF               	movf	indf2,w,c
+   437   000784  EC4A  F003         	call	_data
+   438   000788                     
+   439                           ;malayalmlcd2.c: 149:  }
+   440   000788  4A40               	infsnz	createCustomChar@i^0,f,c
+   441   00078A  2A41               	incf	(createCustomChar@i+1)^0,f,c
+   442   00078C  BE41               	btfsc	(createCustomChar@i+1)^0,7,c
+   443   00078E  EFD2  F003         	goto	u91
+   444   000792  5041               	movf	(createCustomChar@i+1)^0,w,c
+   445   000794  E109               	bnz	u90
+   446   000796  0E08               	movlw	8
+   447   000798  5C40               	subwf	createCustomChar@i^0,w,c
+   448   00079A  A0D8               	btfss	status,0,c
+   449   00079C  EFD2  F003         	goto	u91
+   450   0007A0  EFD4  F003         	goto	u90
+   451   0007A4                     u91:
+   452   0007A4  EFBD  F003         	goto	l864
+   453   0007A8                     u90:
+   454   0007A8                     l66:
+   455   0007A8  0012               	return		;funcret
+   456   0007AA                     __end_of_createCustomChar:
+   457                           	callstack 0
+   458                           
+   459 ;; *************** function _data *****************
+   460 ;; Defined at:
+   461 ;;		line 127 in file "malayalmlcd2.c"
+   462 ;; Parameters:    Size  Location     Type
+   463 ;;  a               1    wreg     unsigned char 
+   464 ;; Auto vars:     Size  Location     Type
+   465 ;;  a               1    0[COMRAM] unsigned char 
+   466 ;;  i               2    3[COMRAM] int 
+   467 ;;  i               2    1[COMRAM] int 
+   468 ;; Return value:  Size  Location     Type
+   469 ;;                  1    wreg      void 
+   470 ;; Registers used:
+   471 ;;		wreg, status,2, status,0
+   472 ;; Tracked objects:
+   473 ;;		On entry : 0/0
+   474 ;;		On exit  : 0/0
+   475 ;;		Unchanged: 0/0
+   476 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   477 ;;      Params:         0       0       0       0       0       0       0
+   478 ;;      Locals:         5       0       0       0       0       0       0
+   479 ;;      Temps:          0       0       0       0       0       0       0
+   480 ;;      Totals:         5       0       0       0       0       0       0
+   481 ;;Total ram usage:        5 bytes
+   482 ;; Hardware stack levels used: 1
+   483 ;; This function calls:
+   484 ;;		Nothing
+   485 ;; This function is called by:
+   486 ;;		_main
+   487 ;;		_createCustomChar
+   488 ;;		_display
+   489 ;; This function uses a non-reentrant model
+   490 ;;
+   491                           
+   492                           	psect	text2
+   493   000694                     __ptext2:
+   494                           	callstack 0
+   495   000694                     _data:
+   496                           	callstack 30
+   497                           
+   498                           ;incstack = 0
+   499                           ;data@a stored from wreg
+   500   000694  6E39               	movwf	data@a^0,c
+   501   000696                     
+   502                           ;malayalmlcd2.c: 128:     RC0 = 1;
+   503   000696  8082               	bsf	3970,0,c	;volatile
+   504                           
+   505                           ;malayalmlcd2.c: 129:     RC1 = 0;
+   506   000698  9282               	bcf	3970,1,c	;volatile
+   507   00069A                     
+   508                           ;malayalmlcd2.c: 130:     PORTD = a;
+   509   00069A  C039  FF83         	movff	data@a,3971	;volatile
+   510   00069E                     
+   511                           ;malayalmlcd2.c: 131:     RC2 = 1;
+   512   00069E  8482               	bsf	3970,2,c	;volatile
+   513   0006A0                     
+   514                           ;malayalmlcd2.c: 132:     for(int i = 0; i <= 100; i++);
+   515   0006A0  0E00               	movlw	0
+   516   0006A2  6E3B               	movwf	(data@i+1)^0,c
+   517   0006A4  0E00               	movlw	0
+   518   0006A6  6E3A               	movwf	data@i^0,c
+   519   0006A8                     l780:
+   520   0006A8  4A3A               	infsnz	data@i^0,f,c
+   521   0006AA  2A3B               	incf	(data@i+1)^0,f,c
+   522   0006AC  BE3B               	btfsc	(data@i+1)^0,7,c
+   523   0006AE  EF62  F003         	goto	u31
+   524   0006B2  503B               	movf	(data@i+1)^0,w,c
+   525   0006B4  E109               	bnz	u30
+   526   0006B6  0E65               	movlw	101
+   527   0006B8  5C3A               	subwf	data@i^0,w,c
+   528   0006BA  A0D8               	btfss	status,0,c
+   529   0006BC  EF62  F003         	goto	u31
+   530   0006C0  EF64  F003         	goto	u30
+   531   0006C4                     u31:
+   532   0006C4  EF54  F003         	goto	l780
+   533   0006C8                     u30:
+   534   0006C8                     
+   535                           ;malayalmlcd2.c: 133:     RC2 = 0;
+   536   0006C8  9482               	bcf	3970,2,c	;volatile
+   537   0006CA                     
+   538                           ;malayalmlcd2.c: 134:     for(int i = 0; i <= 5000; i++);
+   539   0006CA  0E00               	movlw	0
+   540   0006CC  6E3D               	movwf	(data@i_65+1)^0,c
+   541   0006CE  0E00               	movlw	0
+   542   0006D0  6E3C               	movwf	data@i_65^0,c
+   543   0006D2                     l790:
+   544   0006D2  4A3C               	infsnz	data@i_65^0,f,c
+   545   0006D4  2A3D               	incf	(data@i_65+1)^0,f,c
+   546   0006D6  BE3D               	btfsc	(data@i_65+1)^0,7,c
+   547   0006D8  EF77  F003         	goto	u41
+   548   0006DC  0E89               	movlw	137
+   549   0006DE  5C3C               	subwf	data@i_65^0,w,c
+   550   0006E0  0E13               	movlw	19
+   551   0006E2  583D               	subwfb	(data@i_65+1)^0,w,c
+   552   0006E4  A0D8               	btfss	status,0,c
+   553   0006E6  EF77  F003         	goto	u41
+   554   0006EA  EF79  F003         	goto	u40
+   555   0006EE                     u41:
+   556   0006EE  EF69  F003         	goto	l790
+   557   0006F2                     u40:
+   558   0006F2  0012               	return		;funcret
+   559   0006F4                     __end_of_data:
+   560                           	callstack 0
+   561                           
+   562 ;; *************** function _cmd *****************
+   563 ;; Defined at:
+   564 ;;		line 117 in file "malayalmlcd2.c"
+   565 ;; Parameters:    Size  Location     Type
+   566 ;;  a               1    wreg     unsigned char 
+   567 ;; Auto vars:     Size  Location     Type
+   568 ;;  a               1    0[COMRAM] unsigned char 
+   569 ;;  i               2    3[COMRAM] int 
+   570 ;;  i               2    1[COMRAM] int 
+   571 ;; Return value:  Size  Location     Type
+   572 ;;                  1    wreg      void 
+   573 ;; Registers used:
+   574 ;;		wreg, status,2, status,0
+   575 ;; Tracked objects:
+   576 ;;		On entry : 0/0
+   577 ;;		On exit  : 0/0
+   578 ;;		Unchanged: 0/0
+   579 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   580 ;;      Params:         0       0       0       0       0       0       0
+   581 ;;      Locals:         5       0       0       0       0       0       0
+   582 ;;      Temps:          0       0       0       0       0       0       0
+   583 ;;      Totals:         5       0       0       0       0       0       0
+   584 ;;Total ram usage:        5 bytes
+   585 ;; Hardware stack levels used: 1
+   586 ;; This function calls:
+   587 ;;		Nothing
+   588 ;; This function is called by:
+   589 ;;		_main
+   590 ;;		_createCustomChar
+   591 ;; This function uses a non-reentrant model
+   592 ;;
+   593                           
+   594                           	psect	text3
+   595   0006F4                     __ptext3:
+   596                           	callstack 0
+   597   0006F4                     _cmd:
+   598                           	callstack 29
+   599                           
+   600                           ;incstack = 0
+   601                           ;cmd@a stored from wreg
+   602   0006F4  6E39               	movwf	cmd@a^0,c
+   603   0006F6                     
+   604                           ;malayalmlcd2.c: 118:     RC0 = 0;
+   605   0006F6  9082               	bcf	3970,0,c	;volatile
+   606                           
+   607                           ;malayalmlcd2.c: 119:     RC1 = 0;
+   608   0006F8  9282               	bcf	3970,1,c	;volatile
+   609   0006FA                     
+   610                           ;malayalmlcd2.c: 120:     PORTD = a;
+   611   0006FA  C039  FF83         	movff	cmd@a,3971	;volatile
+   612   0006FE                     
+   613                           ;malayalmlcd2.c: 121:     RC2 = 1;
+   614   0006FE  8482               	bsf	3970,2,c	;volatile
+   615   000700                     
+   616                           ;malayalmlcd2.c: 122:     for(int i = 0; i <= 100; i++);
+   617   000700  0E00               	movlw	0
+   618   000702  6E3B               	movwf	(cmd@i+1)^0,c
+   619   000704  0E00               	movlw	0
+   620   000706  6E3A               	movwf	cmd@i^0,c
+   621   000708                     l754:
+   622   000708  4A3A               	infsnz	cmd@i^0,f,c
+   623   00070A  2A3B               	incf	(cmd@i+1)^0,f,c
+   624   00070C  BE3B               	btfsc	(cmd@i+1)^0,7,c
+   625   00070E  EF92  F003         	goto	u11
+   626   000712  503B               	movf	(cmd@i+1)^0,w,c
+   627   000714  E109               	bnz	u10
+   628   000716  0E65               	movlw	101
+   629   000718  5C3A               	subwf	cmd@i^0,w,c
+   630   00071A  A0D8               	btfss	status,0,c
+   631   00071C  EF92  F003         	goto	u11
+   632   000720  EF94  F003         	goto	u10
+   633   000724                     u11:
+   634   000724  EF84  F003         	goto	l754
+   635   000728                     u10:
+   636   000728                     
+   637                           ;malayalmlcd2.c: 123:     RC2 = 0;
+   638   000728  9482               	bcf	3970,2,c	;volatile
+   639   00072A                     
+   640                           ;malayalmlcd2.c: 124:     for(int i = 0; i <= 5000; i++);
+   641   00072A  0E00               	movlw	0
+   642   00072C  6E3D               	movwf	(cmd@i_61+1)^0,c
+   643   00072E  0E00               	movlw	0
+   644   000730  6E3C               	movwf	cmd@i_61^0,c
+   645   000732                     l764:
+   646   000732  4A3C               	infsnz	cmd@i_61^0,f,c
+   647   000734  2A3D               	incf	(cmd@i_61+1)^0,f,c
+   648   000736  BE3D               	btfsc	(cmd@i_61+1)^0,7,c
+   649   000738  EFA7  F003         	goto	u21
+   650   00073C  0E89               	movlw	137
+   651   00073E  5C3C               	subwf	cmd@i_61^0,w,c
+   652   000740  0E13               	movlw	19
+   653   000742  583D               	subwfb	(cmd@i_61+1)^0,w,c
+   654   000744  A0D8               	btfss	status,0,c
+   655   000746  EFA7  F003         	goto	u21
+   656   00074A  EFA9  F003         	goto	u20
+   657   00074E                     u21:
+   658   00074E  EF99  F003         	goto	l764
+   659   000752                     u20:
+   660   000752  0012               	return		;funcret
+   661   000754                     __end_of_cmd:
+   662                           	callstack 0
+   663                           
+   664                           	psect	smallconst
+   665   000600                     __psmallconst:
+   666                           	callstack 0
+   667   000600  00                 	db	0
+   668   000601  00                 	db	0	; dummy byte at the end
+   669   000000                     
+   670                           	psect	rparam
+   671   000000                     tosu	equ	0xFFF
+   672                           tosh	equ	0xFFE
+   673                           tosl	equ	0xFFD
+   674                           stkptr	equ	0xFFC
+   675                           pclatu	equ	0xFFB
+   676                           pclath	equ	0xFFA
+   677                           pcl	equ	0xFF9
+   678                           tblptru	equ	0xFF8
+   679                           tblptrh	equ	0xFF7
+   680                           tblptrl	equ	0xFF6
+   681                           tablat	equ	0xFF5
+   682                           prodh	equ	0xFF4
+   683                           prodl	equ	0xFF3
+   684                           indf0	equ	0xFEF
+   685                           postinc0	equ	0xFEE
+   686                           postdec0	equ	0xFED
+   687                           preinc0	equ	0xFEC
+   688                           plusw0	equ	0xFEB
+   689                           fsr0h	equ	0xFEA
+   690                           fsr0l	equ	0xFE9
+   691                           wreg	equ	0xFE8
+   692                           indf1	equ	0xFE7
+   693                           postinc1	equ	0xFE6
+   694                           postdec1	equ	0xFE5
+   695                           preinc1	equ	0xFE4
+   696                           plusw1	equ	0xFE3
+   697                           fsr1h	equ	0xFE2
+   698                           fsr1l	equ	0xFE1
+   699                           bsr	equ	0xFE0
+   700                           indf2	equ	0xFDF
+   701                           postinc2	equ	0xFDE
+   702                           postdec2	equ	0xFDD
+   703                           preinc2	equ	0xFDC
+   704                           plusw2	equ	0xFDB
+   705                           fsr2h	equ	0xFDA
+   706                           fsr2l	equ	0xFD9
+   707                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     0
+    Constant    0
+    Data        56
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      9      65
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    createCustomChar@pattern	PTR unsigned char  size(1) Largest target is 8
+		 -> char_a1(COMRAM[8]), char_a2(COMRAM[8]), char_ba1(COMRAM[8]), char_ba2(COMRAM[8]), 
+		 -> char_sh1(COMRAM[8]), char_sh2(COMRAM[8]), char_shi(COMRAM[8]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_createCustomChar
+    _createCustomChar->_cmd
+    _createCustomChar->_data
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 0     0      0     966
+                                _cmd
+                   _createCustomChar
+                               _data
+ ---------------------------------------------------------------------------------
+ (1) _createCustomChar                                     4     3      1     816
+                                              5 COMRAM     4     3      1
+                                _cmd
+                               _data
+ ---------------------------------------------------------------------------------
+ (1) _data                                                 5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ (2) _cmd                                                  5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _cmd
+   _createCustomChar
+     _cmd
+     _data
+   _data
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             5FF      0       0      20        0.0%
+BITBIGSFRll        282      0       0      18        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBIGSFRh          6A      0       0      16        0.0%
+BITCOMRAM           5F      0       0       0        0.0%
+COMRAM              5F      9      41       1       68.4%
+BITBIGSFRlh         10      0       0      17        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      41      19        0.0%
+DATA                 0      0      41       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Tue Aug 20 20:23:31 2024
+
+                      l51 06C8                        l44 0728                        l37 068C  
+                      l54 06F2                        l38 068C                        l47 0752  
+                      l66 07A8                        u10 0728                        u11 0724  
+                      u20 0752                        u21 074E                        u30 06C8  
+                      u31 06C4                        u40 06F2                        u41 06EE  
+                      u80 0766                        u81 0762                        u90 07A8  
+                      u91 07A4                       l900 067A                       l742 06F6  
+                     l902 0680                       l744 06FA                       l904 0686  
+                     l754 0708                       l746 06FE                       l770 069A  
+                     l764 0732                       l756 070C                       l748 0700  
+                     l780 06A8                       l772 069E                       l766 0736  
+                     l758 072A                       l790 06D2                       l782 06AC  
+                     l774 06A0                       l854 0756                       l870 0602  
+                     l792 06D6                       l784 06CA                       l768 0696  
+                     l864 077A                       l856 0766                       l880 062A  
+                     l872 060A                       l866 0788                       l858 0772  
+                     l890 065C                       l882 0634                       l874 0610  
+                     l868 078C                       l892 0662                       l884 063E  
+                     l876 0616                       l894 0668                       l886 0648  
+                     l878 0620                       l896 066E                       l888 0652  
+                     l898 0674                       _RC0 7C10                       _RC1 7C11  
+                     _RC2 7C12                       _cmd 06F4                      ?_cmd 0039  
+                    _data 0694                      cmd@a 0039                      cmd@i 003A  
+                    _main 0602                      fsr2h 0FDA                      indf2 0FDF  
+                    fsr1l 0FE1                      fsr2l 0FD9                      prodl 0FF3  
+                    start 0000              ___param_bank 0000                     ??_cmd 0039  
+__end_of_createCustomChar 07AA                     ?_data 0039                     ?_main 0039  
+                   _PORTD 0F83                     _TRISC 0F94                     _TRISD 0F95  
+                   data@a 0039                     data@i 003A                     tablat 0FF5  
+                   status 0FD8           __initialization 07E2              __end_of_data 06F4  
+            __end_of_main 0694                    ??_data 0039                    ??_main 0042  
+           __activetblptr 0000                    isa$std 0001              __pdataCOMRAM 0001  
+            __mediumconst 0000                    tblptrh 0FF7                    tblptrl 0FF6  
+                  tblptru 0FF8   createCustomChar@pattern 003E                __accesstop 0060  
+ __end_of__initialization 0802             ___rparam_used 0001            __pcstackCOMRAM 0039  
+       ?_createCustomChar 003E        ??_createCustomChar 003F                   __Hparam 0000  
+                 __Lparam 0000              __psmallconst 0600                   _char_a1 0031  
+                 _char_a2 0029                   __pcinit 07E2                   __ramtop 0600  
+                 __ptext0 0602                   __ptext1 0754                   cmd@i_61 003C  
+                 __ptext2 0694                   __ptext3 06F4      end_of_initialization 0802  
+createCustomChar@location 003F                   postdec1 0FE5                   postinc0 0FEE  
+           __pidataCOMRAM 07AA       start_initialization 07E2               __end_of_cmd 0754  
+       createCustomChar@i 0040               __smallconst 0600                 copy_data0 07F6  
+                __Hrparam 0000                  __Lrparam 0000                  _char_ba1 0009  
+                _char_ba2 0001                  _char_sh1 0021                  _char_sh2 0019  
+                _char_shi 0011          _createCustomChar 0754                  data@i_65 003C  
+                isa$xinst 0000  

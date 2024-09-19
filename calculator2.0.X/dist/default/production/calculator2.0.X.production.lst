@@ -1,0 +1,1093 @@
+
+
+Microchip MPLAB XC8 Assembler V2.46 build 20240104201356 
+                                                                                               Sat Aug 10 18:22:20 2024
+
+Microchip MPLAB XC8 C Compiler v2.46 (Free license) build 20240104201356 Og1 
+     1                           	processor	18F4580
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    13                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    14   000000                     
+    15                           ; Generated 17/10/2023 GMT
+    16                           ; 
+    17                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    18                           ; All rights reserved.
+    19                           ; 
+    20                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    21                           ; 
+    22                           ; Redistribution and use in source and binary forms, with or without modification, are
+    23                           ; permitted provided that the following conditions are met:
+    24                           ; 
+    25                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    26                           ;        conditions and the following disclaimer.
+    27                           ; 
+    28                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    29                           ;        of conditions and the following disclaimer in the documentation and/or other
+    30                           ;        materials provided with the distribution. Publication is not required when
+    31                           ;        this file is used in an embedded application.
+    32                           ; 
+    33                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    34                           ;        software without specific prior written permission.
+    35                           ; 
+    36                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    37                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    38                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    39                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    40                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    41                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    42                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    43                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    44                           ; 
+    45                           ; 
+    46                           ; Code-generator required, PIC18F4580 Definitions
+    47                           ; 
+    48                           ; SFR Addresses
+    49   000000                     _RC2	set	31762
+    50   000000                     _RC1	set	31761
+    51   000000                     _RB7	set	31759
+    52   000000                     _RB6	set	31758
+    53   000000                     _RB5	set	31757
+    54   000000                     _RB4	set	31756
+    55   000000                     _PORTB	set	3969
+    56   000000                     _TRISB	set	3987
+    57   000000                     _ADCON1	set	4033
+    58   000000                     _TRISD	set	3989
+    59   000000                     _TRISC	set	3988
+    60   000000                     _PORTD	set	3971
+    61   000000                     _RC0	set	31760
+    62                           
+    63                           	psect	smallconst
+    64   000600                     __psmallconst:
+    65                           	callstack 0
+    66   000600  00                 	db	0
+    67   000601                     STR_4:
+    68   000601  20                 	db	32
+    69   000602  00                 	db	0
+    70   000603                     STR_11:
+    71   000603  30                 	db	48	;'0'
+    72   000604  00                 	db	0
+    73   000605                     STR_8:
+    74   000605  31                 	db	49	;'1'
+    75   000606  00                 	db	0
+    76   000607                     STR_9:
+    77   000607  32                 	db	50	;'2'
+    78   000608  00                 	db	0
+    79   000609                     STR_10:
+    80   000609  33                 	db	51	;'3'
+    81   00060A  00                 	db	0
+    82   00060B                     STR_5:
+    83   00060B  34                 	db	52	;'4'
+    84   00060C  00                 	db	0
+    85   00060D                     STR_6:
+    86   00060D  35                 	db	53	;'5'
+    87   00060E  00                 	db	0
+    88   00060F                     STR_7:
+    89   00060F  36                 	db	54	;'6'
+    90   000610  00                 	db	0
+    91   000611                     STR_1:
+    92   000611  37                 	db	55	;'7'
+    93   000612  00                 	db	0
+    94   000613                     STR_2:
+    95   000613  38                 	db	56	;'8'
+    96   000614  00                 	db	0
+    97   000615                     STR_3:
+    98   000615  39                 	db	57	;'9'
+    99   000616  00                 	db	0
+   100   000617  00                 	db	0	; dummy byte at the end
+   101   000000                     
+   102                           ; #config settings
+   103                           
+   104                           	psect	cinit
+   105   000986                     __pcinit:
+   106                           	callstack 0
+   107   000986                     start_initialization:
+   108                           	callstack 0
+   109   000986                     __initialization:
+   110                           	callstack 0
+   111   000986                     end_of_initialization:
+   112                           	callstack 0
+   113   000986                     __end_of__initialization:
+   114                           	callstack 0
+   115   000986  0E00               	movlw	low (__Lsmallconst shr (0+16))
+   116   000988  6EF8               	movwf	tblptru,c
+   117   00098A  0E06               	movlw	high __Lsmallconst
+   118   00098C  6EF7               	movwf	tblptrh,c
+   119   00098E  0100               	movlb	0
+   120   000990  EF0C  F003         	goto	_main	;jump to C main() function
+   121                           
+   122                           	psect	cstackCOMRAM
+   123   000001                     __pcstackCOMRAM:
+   124                           	callstack 0
+   125   000001                     cmd@a:
+   126                           	callstack 0
+   127   000001                     data@a:
+   128                           	callstack 0
+   129                           
+   130                           ; 1 bytes @ 0x0
+   131   000001                     	ds	1
+   132   000002                     cmd@i:
+   133                           	callstack 0
+   134   000002                     data@i:
+   135                           	callstack 0
+   136                           
+   137                           ; 2 bytes @ 0x1
+   138   000002                     	ds	2
+   139   000004                     cmd@i_67:
+   140                           	callstack 0
+   141   000004                     data@i_71:
+   142                           	callstack 0
+   143                           
+   144                           ; 2 bytes @ 0x3
+   145   000004                     	ds	2
+   146   000006                     display@p:
+   147                           	callstack 0
+   148                           
+   149                           ; 1 bytes @ 0x5
+   150   000006                     	ds	1
+   151   000007                     main@count:
+   152                           	callstack 0
+   153                           
+   154                           ; 2 bytes @ 0x6
+   155   000007                     	ds	2
+   156                           
+   157 ;;
+   158 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   159 ;;
+   160 ;; *************** function _main *****************
+   161 ;; Defined at:
+   162 ;;		line 13 in file "matrixcalculator1.c"
+   163 ;; Parameters:    Size  Location     Type
+   164 ;;		None
+   165 ;; Auto vars:     Size  Location     Type
+   166 ;;  count           2    6[COMRAM] int 
+   167 ;; Return value:  Size  Location     Type
+   168 ;;                  1    wreg      void 
+   169 ;; Registers used:
+   170 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   171 ;; Tracked objects:
+   172 ;;		On entry : 0/0
+   173 ;;		On exit  : 0/0
+   174 ;;		Unchanged: 0/0
+   175 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   176 ;;      Params:         0       0       0       0       0       0       0
+   177 ;;      Locals:         2       0       0       0       0       0       0
+   178 ;;      Temps:          0       0       0       0       0       0       0
+   179 ;;      Totals:         2       0       0       0       0       0       0
+   180 ;;Total ram usage:        2 bytes
+   181 ;; Hardware stack levels required when called: 2
+   182 ;; This function calls:
+   183 ;;		_cmd
+   184 ;;		_display
+   185 ;; This function is called by:
+   186 ;;		Startup code after reset
+   187 ;; This function uses a non-reentrant model
+   188 ;;
+   189                           
+   190                           	psect	text0
+   191   000618                     __ptext0:
+   192                           	callstack 0
+   193   000618                     _main:
+   194                           	callstack 29
+   195   000618                     
+   196                           ;matrixcalculator1.c: 14:     ADCON1=0X0F;
+   197   000618  0E0F               	movlw	15
+   198   00061A  6EC1               	movwf	193,c	;volatile
+   199                           
+   200                           ;matrixcalculator1.c: 15:     TRISB=0XF0;
+   201   00061C  0EF0               	movlw	240
+   202   00061E  6E93               	movwf	147,c	;volatile
+   203                           
+   204                           ;matrixcalculator1.c: 16:     TRISC=TRISD=0X00;
+   205   000620  0E00               	movlw	0
+   206   000622  6E95               	movwf	149,c	;volatile
+   207   000624  CF95 FF94          	movff	3989,3988	;volatile
+   208                           
+   209                           ;matrixcalculator1.c: 17:     int count=0;
+   210   000628  0E00               	movlw	0
+   211   00062A  6E08               	movwf	(main@count+1)^0,c
+   212   00062C  0E00               	movlw	0
+   213   00062E  6E07               	movwf	main@count^0,c
+   214   000630                     
+   215                           ;matrixcalculator1.c: 18:     cmd(0x0f);
+   216   000630  0E0F               	movlw	15
+   217   000632  EC7D  F004         	call	_cmd
+   218   000636                     l933:
+   219                           
+   220                           ;matrixcalculator1.c: 20:     PORTB=0X0E;
+   221   000636  0E0E               	movlw	14
+   222   000638  6E81               	movwf	129,c	;volatile
+   223   00063A                     
+   224                           ;matrixcalculator1.c: 21:     if(RB4==0)
+   225   00063A  B881               	btfsc	3969,4,c	;volatile
+   226   00063C  EF22  F003         	goto	u361
+   227   000640  EF24  F003         	goto	u360
+   228   000644                     u361:
+   229   000644  EF31  F003         	goto	l36
+   230   000648                     u360:
+   231   000648                     
+   232                           ;matrixcalculator1.c: 22:     {;matrixcalculator1.c: 23:         display("7");
+   233   000648  0E11               	movlw	low STR_1
+   234   00064A  6E06               	movwf	display@p^0,c
+   235   00064C  ECAD  F004         	call	_display	;wreg free
+   236   000650                     l37:
+   237   000650  A881               	btfss	3969,4,c	;volatile
+   238   000652  EF2D  F003         	goto	u371
+   239   000656  EF2F  F003         	goto	u370
+   240   00065A                     u371:
+   241   00065A  EF28  F003         	goto	l37
+   242   00065E                     u370:
+   243   00065E  EF71  F003         	goto	l949
+   244   000662                     l36:
+   245   000662  BA81               	btfsc	3969,5,c	;volatile
+   246   000664  EF36  F003         	goto	u381
+   247   000668  EF38  F003         	goto	u380
+   248   00066C                     u381:
+   249   00066C  EF45  F003         	goto	l41
+   250   000670                     u380:
+   251   000670                     
+   252                           ;matrixcalculator1.c: 27:     {;matrixcalculator1.c: 28:          display("8");
+   253   000670  0E13               	movlw	low STR_2
+   254   000672  6E06               	movwf	display@p^0,c
+   255   000674  ECAD  F004         	call	_display	;wreg free
+   256   000678                     l42:
+   257   000678  AA81               	btfss	3969,5,c	;volatile
+   258   00067A  EF41  F003         	goto	u391
+   259   00067E  EF43  F003         	goto	u390
+   260   000682                     u391:
+   261   000682  EF3C  F003         	goto	l42
+   262   000686                     u390:
+   263   000686  EF71  F003         	goto	l949
+   264   00068A                     l41:
+   265   00068A  BC81               	btfsc	3969,6,c	;volatile
+   266   00068C  EF4A  F003         	goto	u401
+   267   000690  EF4C  F003         	goto	u400
+   268   000694                     u401:
+   269   000694  EF59  F003         	goto	l46
+   270   000698                     u400:
+   271   000698                     
+   272                           ;matrixcalculator1.c: 32:     {;matrixcalculator1.c: 33:          display("9");
+   273   000698  0E15               	movlw	low STR_3
+   274   00069A  6E06               	movwf	display@p^0,c
+   275   00069C  ECAD  F004         	call	_display	;wreg free
+   276   0006A0                     l47:
+   277   0006A0  AC81               	btfss	3969,6,c	;volatile
+   278   0006A2  EF55  F003         	goto	u411
+   279   0006A6  EF57  F003         	goto	u410
+   280   0006AA                     u411:
+   281   0006AA  EF50  F003         	goto	l47
+   282   0006AE                     u410:
+   283   0006AE  EF71  F003         	goto	l949
+   284   0006B2                     l46:
+   285   0006B2  BE81               	btfsc	3969,7,c	;volatile
+   286   0006B4  EF5E  F003         	goto	u421
+   287   0006B8  EF60  F003         	goto	u420
+   288   0006BC                     u421:
+   289   0006BC  EF71  F003         	goto	l949
+   290   0006C0                     u420:
+   291   0006C0                     
+   292                           ;matrixcalculator1.c: 37:     {;matrixcalculator1.c: 38:         cmd(0x10);
+   293   0006C0  0E10               	movlw	16
+   294   0006C2  EC7D  F004         	call	_cmd
+   295   0006C6                     
+   296                           ;matrixcalculator1.c: 39:        display(" ");
+   297   0006C6  0E01               	movlw	low STR_4
+   298   0006C8  6E06               	movwf	display@p^0,c
+   299   0006CA  ECAD  F004         	call	_display	;wreg free
+   300   0006CE                     
+   301                           ;matrixcalculator1.c: 40:        cmd(0x10);
+   302   0006CE  0E10               	movlw	16
+   303   0006D0  EC7D  F004         	call	_cmd
+   304   0006D4                     l52:
+   305   0006D4  AE81               	btfss	3969,7,c	;volatile
+   306   0006D6  EF6F  F003         	goto	u431
+   307   0006DA  EF71  F003         	goto	u430
+   308   0006DE                     u431:
+   309   0006DE  EF6A  F003         	goto	l52
+   310   0006E2                     u430:
+   311   0006E2                     l949:
+   312                           
+   313                           ;matrixcalculator1.c: 43:     PORTB=0X0D;
+   314   0006E2  0E0D               	movlw	13
+   315   0006E4  6E81               	movwf	129,c	;volatile
+   316   0006E6                     
+   317                           ;matrixcalculator1.c: 44:      if(RB4==0)
+   318   0006E6  B881               	btfsc	3969,4,c	;volatile
+   319   0006E8  EF78  F003         	goto	u441
+   320   0006EC  EF7A  F003         	goto	u440
+   321   0006F0                     u441:
+   322   0006F0  EF87  F003         	goto	l55
+   323   0006F4                     u440:
+   324   0006F4                     
+   325                           ;matrixcalculator1.c: 45:     {;matrixcalculator1.c: 46:         display("4");
+   326   0006F4  0E0B               	movlw	low STR_5
+   327   0006F6  6E06               	movwf	display@p^0,c
+   328   0006F8  ECAD  F004         	call	_display	;wreg free
+   329   0006FC                     l56:
+   330   0006FC  A881               	btfss	3969,4,c	;volatile
+   331   0006FE  EF83  F003         	goto	u451
+   332   000702  EF85  F003         	goto	u450
+   333   000706                     u451:
+   334   000706  EF7E  F003         	goto	l56
+   335   00070A                     u450:
+   336   00070A  EFAD  F003         	goto	l959
+   337   00070E                     l55:
+   338   00070E  BA81               	btfsc	3969,5,c	;volatile
+   339   000710  EF8C  F003         	goto	u461
+   340   000714  EF8E  F003         	goto	u460
+   341   000718                     u461:
+   342   000718  EF9B  F003         	goto	l60
+   343   00071C                     u460:
+   344   00071C                     
+   345                           ;matrixcalculator1.c: 50:     {;matrixcalculator1.c: 51:          display("5");
+   346   00071C  0E0D               	movlw	low STR_6
+   347   00071E  6E06               	movwf	display@p^0,c
+   348   000720  ECAD  F004         	call	_display	;wreg free
+   349   000724                     l61:
+   350   000724  AA81               	btfss	3969,5,c	;volatile
+   351   000726  EF97  F003         	goto	u471
+   352   00072A  EF99  F003         	goto	u470
+   353   00072E                     u471:
+   354   00072E  EF92  F003         	goto	l61
+   355   000732                     u470:
+   356   000732  EFAD  F003         	goto	l959
+   357   000736                     l60:
+   358   000736  BC81               	btfsc	3969,6,c	;volatile
+   359   000738  EFA0  F003         	goto	u481
+   360   00073C  EFA2  F003         	goto	u480
+   361   000740                     u481:
+   362   000740  EFAD  F003         	goto	l959
+   363   000744                     u480:
+   364   000744                     
+   365                           ;matrixcalculator1.c: 55:     {;matrixcalculator1.c: 56:           display("6");
+   366   000744  0E0F               	movlw	low STR_7
+   367   000746  6E06               	movwf	display@p^0,c
+   368   000748  ECAD  F004         	call	_display	;wreg free
+   369   00074C                     l66:
+   370   00074C  AC81               	btfss	3969,6,c	;volatile
+   371   00074E  EFAB  F003         	goto	u491
+   372   000752  EFAD  F003         	goto	u490
+   373   000756                     u491:
+   374   000756  EFA6  F003         	goto	l66
+   375   00075A                     u490:
+   376   00075A                     l959:
+   377                           
+   378                           ;matrixcalculator1.c: 64: PORTB=0X0B;
+   379   00075A  0E0B               	movlw	11
+   380   00075C  6E81               	movwf	129,c	;volatile
+   381   00075E                     
+   382                           ;matrixcalculator1.c: 66:      if(RB4==0)
+   383   00075E  B881               	btfsc	3969,4,c	;volatile
+   384   000760  EFB4  F003         	goto	u501
+   385   000764  EFB6  F003         	goto	u500
+   386   000768                     u501:
+   387   000768  EFC3  F003         	goto	l69
+   388   00076C                     u500:
+   389   00076C                     
+   390                           ;matrixcalculator1.c: 67:     {;matrixcalculator1.c: 69:         display("1");
+   391   00076C  0E05               	movlw	low STR_8
+   392   00076E  6E06               	movwf	display@p^0,c
+   393   000770  ECAD  F004         	call	_display	;wreg free
+   394   000774                     l70:
+   395   000774  A881               	btfss	3969,4,c	;volatile
+   396   000776  EFBF  F003         	goto	u511
+   397   00077A  EFC1  F003         	goto	u510
+   398   00077E                     u511:
+   399   00077E  EFBA  F003         	goto	l70
+   400   000782                     u510:
+   401   000782  EFE9  F003         	goto	l969
+   402   000786                     l69:
+   403   000786  BA81               	btfsc	3969,5,c	;volatile
+   404   000788  EFC8  F003         	goto	u521
+   405   00078C  EFCA  F003         	goto	u520
+   406   000790                     u521:
+   407   000790  EFD7  F003         	goto	l74
+   408   000794                     u520:
+   409   000794                     
+   410                           ;matrixcalculator1.c: 73:     {;matrixcalculator1.c: 75:          display("2");
+   411   000794  0E07               	movlw	low STR_9
+   412   000796  6E06               	movwf	display@p^0,c
+   413   000798  ECAD  F004         	call	_display	;wreg free
+   414   00079C                     l75:
+   415   00079C  AA81               	btfss	3969,5,c	;volatile
+   416   00079E  EFD3  F003         	goto	u531
+   417   0007A2  EFD5  F003         	goto	u530
+   418   0007A6                     u531:
+   419   0007A6  EFCE  F003         	goto	l75
+   420   0007AA                     u530:
+   421   0007AA  EFE9  F003         	goto	l969
+   422   0007AE                     l74:
+   423   0007AE  BC81               	btfsc	3969,6,c	;volatile
+   424   0007B0  EFDC  F003         	goto	u541
+   425   0007B4  EFDE  F003         	goto	u540
+   426   0007B8                     u541:
+   427   0007B8  EFE9  F003         	goto	l969
+   428   0007BC                     u540:
+   429   0007BC                     
+   430                           ;matrixcalculator1.c: 79:     {;matrixcalculator1.c: 81:         display("3");
+   431   0007BC  0E09               	movlw	low STR_10
+   432   0007BE  6E06               	movwf	display@p^0,c
+   433   0007C0  ECAD  F004         	call	_display	;wreg free
+   434   0007C4                     l80:
+   435   0007C4  AC81               	btfss	3969,6,c	;volatile
+   436   0007C6  EFE7  F003         	goto	u551
+   437   0007CA  EFE9  F003         	goto	u550
+   438   0007CE                     u551:
+   439   0007CE  EFE2  F003         	goto	l80
+   440   0007D2                     u550:
+   441   0007D2                     l969:
+   442                           
+   443                           ;matrixcalculator1.c: 90:     PORTB=0X07;
+   444   0007D2  0E07               	movlw	7
+   445   0007D4  6E81               	movwf	129,c	;volatile
+   446   0007D6                     
+   447                           ;matrixcalculator1.c: 91:     if(RB4==0)
+   448   0007D6  B881               	btfsc	3969,4,c	;volatile
+   449   0007D8  EFF0  F003         	goto	u561
+   450   0007DC  EFF2  F003         	goto	u560
+   451   0007E0                     u561:
+   452   0007E0  EF22  F004         	goto	l83
+   453   0007E4                     u560:
+   454   0007E4                     
+   455                           ;matrixcalculator1.c: 92:     {;matrixcalculator1.c: 93:         if(count==0)
+   456   0007E4  5007               	movf	main@count^0,w,c
+   457   0007E6  1008               	iorwf	(main@count+1)^0,w,c
+   458   0007E8  A4D8               	btfss	status,2,c
+   459   0007EA  EFF9  F003         	goto	u571
+   460   0007EE  EFFB  F003         	goto	u570
+   461   0007F2                     u571:
+   462   0007F2  EF09  F004         	goto	l979
+   463   0007F6                     u570:
+   464   0007F6                     
+   465                           ;matrixcalculator1.c: 94:         {;matrixcalculator1.c: 95:             cmd(0x08);
+   466   0007F6  0E08               	movlw	8
+   467   0007F8  EC7D  F004         	call	_cmd
+   468   0007FC                     l85:
+   469   0007FC  A881               	btfss	3969,4,c	;volatile
+   470   0007FE  EF03  F004         	goto	u581
+   471   000802  EF05  F004         	goto	u580
+   472   000806                     u581:
+   473   000806  EFFE  F003         	goto	l85
+   474   00080A                     u580:
+   475   00080A                     
+   476                           ;matrixcalculator1.c: 97:              count++;
+   477   00080A  4A07               	infsnz	main@count^0,f,c
+   478   00080C  2A08               	incf	(main@count+1)^0,f,c
+   479                           
+   480                           ;matrixcalculator1.c: 98:     }
+   481   00080E  EF1B  F003         	goto	l933
+   482   000812                     l979:
+   483   000812  0407               	decf	main@count^0,w,c
+   484   000814  1008               	iorwf	(main@count+1)^0,w,c
+   485   000816  A4D8               	btfss	status,2,c
+   486   000818  EF10  F004         	goto	u591
+   487   00081C  EF12  F004         	goto	u590
+   488   000820                     u591:
+   489   000820  EF49  F004         	goto	l93
+   490   000824                     u590:
+   491   000824                     
+   492                           ;matrixcalculator1.c: 100:         {;matrixcalculator1.c: 101:             cmd(0x0e);
+   493   000824  0E0E               	movlw	14
+   494   000826  EC7D  F004         	call	_cmd
+   495   00082A                     l90:
+   496   00082A  A881               	btfss	3969,4,c	;volatile
+   497   00082C  EF1A  F004         	goto	u601
+   498   000830  EF1C  F004         	goto	u600
+   499   000834                     u601:
+   500   000834  EF15  F004         	goto	l90
+   501   000838                     u600:
+   502   000838                     
+   503                           ;matrixcalculator1.c: 103:              count=0;
+   504   000838  0E00               	movlw	0
+   505   00083A  6E08               	movwf	(main@count+1)^0,c
+   506   00083C  0E00               	movlw	0
+   507   00083E  6E07               	movwf	main@count^0,c
+   508   000840  EF1B  F003         	goto	l933
+   509   000844                     l83:
+   510   000844  BA81               	btfsc	3969,5,c	;volatile
+   511   000846  EF27  F004         	goto	u611
+   512   00084A  EF29  F004         	goto	u610
+   513   00084E                     u611:
+   514   00084E  EF36  F004         	goto	l94
+   515   000852                     u610:
+   516   000852                     
+   517                           ;matrixcalculator1.c: 106:     {;matrixcalculator1.c: 108:          display("0");
+   518   000852  0E03               	movlw	low STR_11
+   519   000854  6E06               	movwf	display@p^0,c
+   520   000856  ECAD  F004         	call	_display	;wreg free
+   521   00085A                     l95:
+   522   00085A  AA81               	btfss	3969,5,c	;volatile
+   523   00085C  EF32  F004         	goto	u621
+   524   000860  EF34  F004         	goto	u620
+   525   000864                     u621:
+   526   000864  EF2D  F004         	goto	l95
+   527   000868                     u620:
+   528   000868  EF1B  F003         	goto	l933
+   529   00086C                     l94:
+   530   00086C  BC81               	btfsc	3969,6,c	;volatile
+   531   00086E  EF3B  F004         	goto	u631
+   532   000872  EF3D  F004         	goto	u630
+   533   000876                     u631:
+   534   000876  EF49  F004         	goto	l93
+   535   00087A                     u630:
+   536   00087A                     
+   537                           ;matrixcalculator1.c: 112:     {;matrixcalculator1.c: 113:         cmd(0x01);
+   538   00087A  0E01               	movlw	1
+   539   00087C  EC7D  F004         	call	_cmd
+   540   000880                     l100:
+   541   000880  AC81               	btfss	3969,6,c	;volatile
+   542   000882  EF45  F004         	goto	u641
+   543   000886  EF47  F004         	goto	u640
+   544   00088A                     u641:
+   545   00088A  EF40  F004         	goto	l100
+   546   00088E                     u640:
+   547   00088E  EF1B  F003         	goto	l933
+   548   000892                     l93:
+   549   000892  EF1B  F003         	goto	l933
+   550   000896  EF00  F000         	goto	start
+   551   00089A                     __end_of_main:
+   552                           	callstack 0
+   553                           
+   554 ;; *************** function _display *****************
+   555 ;; Defined at:
+   556 ;;		line 145 in file "matrixcalculator1.c"
+   557 ;; Parameters:    Size  Location     Type
+   558 ;;  p               1    5[COMRAM] PTR const unsigned char 
+   559 ;;		 -> STR_11(2), STR_10(2), STR_9(2), STR_8(2), 
+   560 ;;		 -> STR_7(2), STR_6(2), STR_5(2), STR_4(2), 
+   561 ;;		 -> STR_3(2), STR_2(2), STR_1(2), 
+   562 ;; Auto vars:     Size  Location     Type
+   563 ;;		None
+   564 ;; Return value:  Size  Location     Type
+   565 ;;                  1    wreg      void 
+   566 ;; Registers used:
+   567 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   568 ;; Tracked objects:
+   569 ;;		On entry : 0/0
+   570 ;;		On exit  : 0/0
+   571 ;;		Unchanged: 0/0
+   572 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   573 ;;      Params:         1       0       0       0       0       0       0
+   574 ;;      Locals:         0       0       0       0       0       0       0
+   575 ;;      Temps:          0       0       0       0       0       0       0
+   576 ;;      Totals:         1       0       0       0       0       0       0
+   577 ;;Total ram usage:        1 bytes
+   578 ;; Hardware stack levels used: 1
+   579 ;; Hardware stack levels required when called: 1
+   580 ;; This function calls:
+   581 ;;		_data
+   582 ;; This function is called by:
+   583 ;;		_main
+   584 ;; This function uses a non-reentrant model
+   585 ;;
+   586                           
+   587                           	psect	text1
+   588   00095A                     __ptext1:
+   589                           	callstack 0
+   590   00095A                     _display:
+   591                           	callstack 29
+   592   00095A                     
+   593                           ;matrixcalculator1.c: 145: void display(const char *p);matrixcalculator1.c: 146: {;matri
+      +                          xcalculator1.c: 147:     while(*p)
+   594   00095A  EFB6  F004         	goto	l927
+   595   00095E                     l923:
+   596                           
+   597                           ;matrixcalculator1.c: 148:     {;matrixcalculator1.c: 149:         data(*p);
+   598   00095E  C006  FFF6         	movff	display@p,tblptrl
+   599   000962                     	if	0	;There is only one active tblptr byte
+   600   000962                     	endif
+   601   000962                     	if	0	;tblptru may be non-zero
+   602   000962                     	endif
+   603   000962                     	if	0	;tblptru may be non-zero
+   604   000962                     	endif
+   605   000962  0008               	tblrd		*
+   606   000964  50F5               	movf	tablat,w,c
+   607   000966  EC4D  F004         	call	_data
+   608   00096A                     
+   609                           ;matrixcalculator1.c: 150: p++;
+   610   00096A  2A06               	incf	display@p^0,f,c
+   611   00096C                     l927:
+   612                           
+   613                           ;matrixcalculator1.c: 147:     while(*p)
+   614   00096C  C006  FFF6         	movff	display@p,tblptrl
+   615   000970                     	if	0	;There is only one active tblptr byte
+   616   000970                     	endif
+   617   000970                     	if	0	;tblptru may be non-zero
+   618   000970                     	endif
+   619   000970                     	if	0	;tblptru may be non-zero
+   620   000970                     	endif
+   621   000970  0008               	tblrd		*
+   622   000972  50F5               	movf	tablat,w,c
+   623   000974  0900               	iorlw	0
+   624   000976  A4D8               	btfss	status,2,c
+   625   000978  EFC0  F004         	goto	u351
+   626   00097C  EFC2  F004         	goto	u350
+   627   000980                     u351:
+   628   000980  EFAF  F004         	goto	l923
+   629   000984                     u350:
+   630   000984  0012               	return		;funcret
+   631   000986                     __end_of_display:
+   632                           	callstack 0
+   633                           
+   634 ;; *************** function _data *****************
+   635 ;; Defined at:
+   636 ;;		line 134 in file "matrixcalculator1.c"
+   637 ;; Parameters:    Size  Location     Type
+   638 ;;  a               1    wreg     unsigned char 
+   639 ;; Auto vars:     Size  Location     Type
+   640 ;;  a               1    0[COMRAM] unsigned char 
+   641 ;;  i               2    3[COMRAM] int 
+   642 ;;  i               2    1[COMRAM] int 
+   643 ;; Return value:  Size  Location     Type
+   644 ;;                  1    wreg      void 
+   645 ;; Registers used:
+   646 ;;		wreg, status,2, status,0
+   647 ;; Tracked objects:
+   648 ;;		On entry : 0/0
+   649 ;;		On exit  : 0/0
+   650 ;;		Unchanged: 0/0
+   651 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   652 ;;      Params:         0       0       0       0       0       0       0
+   653 ;;      Locals:         5       0       0       0       0       0       0
+   654 ;;      Temps:          0       0       0       0       0       0       0
+   655 ;;      Totals:         5       0       0       0       0       0       0
+   656 ;;Total ram usage:        5 bytes
+   657 ;; Hardware stack levels used: 1
+   658 ;; This function calls:
+   659 ;;		Nothing
+   660 ;; This function is called by:
+   661 ;;		_display
+   662 ;; This function uses a non-reentrant model
+   663 ;;
+   664                           
+   665                           	psect	text2
+   666   00089A                     __ptext2:
+   667                           	callstack 0
+   668   00089A                     _data:
+   669                           	callstack 29
+   670                           
+   671                           ;incstack = 0
+   672                           ;data@a stored from wreg
+   673   00089A  6E01               	movwf	data@a^0,c
+   674   00089C                     
+   675                           ;matrixcalculator1.c: 134: void data(unsigned char a );matrixcalculator1.c: 135: {;matri
+      +                          xcalculator1.c: 136:     RC0=1;
+   676   00089C  8082               	bsf	3970,0,c	;volatile
+   677                           
+   678                           ;matrixcalculator1.c: 137:     RC1=0;
+   679   00089E  9282               	bcf	3970,1,c	;volatile
+   680   0008A0                     
+   681                           ;matrixcalculator1.c: 138:     PORTD=a;
+   682   0008A0  C001  FF83         	movff	data@a,3971	;volatile
+   683   0008A4                     
+   684                           ;matrixcalculator1.c: 139:     RC2=1;
+   685   0008A4  8482               	bsf	3970,2,c	;volatile
+   686   0008A6                     
+   687                           ;matrixcalculator1.c: 140:     for(int i=0;i<=100;i++);
+   688   0008A6  0E00               	movlw	0
+   689   0008A8  6E03               	movwf	(data@i+1)^0,c
+   690   0008AA  0E00               	movlw	0
+   691   0008AC  6E02               	movwf	data@i^0,c
+   692   0008AE                     l813:
+   693   0008AE  4A02               	infsnz	data@i^0,f,c
+   694   0008B0  2A03               	incf	(data@i+1)^0,f,c
+   695   0008B2  BE03               	btfsc	(data@i+1)^0,7,c
+   696   0008B4  EF65  F004         	goto	u11
+   697   0008B8  5003               	movf	(data@i+1)^0,w,c
+   698   0008BA  E109               	bnz	u10
+   699   0008BC  0E65               	movlw	101
+   700   0008BE  5C02               	subwf	data@i^0,w,c
+   701   0008C0  A0D8               	btfss	status,0,c
+   702   0008C2  EF65  F004         	goto	u11
+   703   0008C6  EF67  F004         	goto	u10
+   704   0008CA                     u11:
+   705   0008CA  EF57  F004         	goto	l813
+   706   0008CE                     u10:
+   707   0008CE                     
+   708                           ;matrixcalculator1.c: 141:     RC2=0;
+   709   0008CE  9482               	bcf	3970,2,c	;volatile
+   710   0008D0                     
+   711                           ;matrixcalculator1.c: 142:     for(int i=0;i<=5000;i++);
+   712   0008D0  0E00               	movlw	0
+   713   0008D2  6E05               	movwf	(data@i_71+1)^0,c
+   714   0008D4  0E00               	movlw	0
+   715   0008D6  6E04               	movwf	data@i_71^0,c
+   716   0008D8                     l823:
+   717   0008D8  4A04               	infsnz	data@i_71^0,f,c
+   718   0008DA  2A05               	incf	(data@i_71+1)^0,f,c
+   719   0008DC  BE05               	btfsc	(data@i_71+1)^0,7,c
+   720   0008DE  EF7A  F004         	goto	u21
+   721   0008E2  0E89               	movlw	137
+   722   0008E4  5C04               	subwf	data@i_71^0,w,c
+   723   0008E6  0E13               	movlw	19
+   724   0008E8  5805               	subwfb	(data@i_71+1)^0,w,c
+   725   0008EA  A0D8               	btfss	status,0,c
+   726   0008EC  EF7A  F004         	goto	u21
+   727   0008F0  EF7C  F004         	goto	u20
+   728   0008F4                     u21:
+   729   0008F4  EF6C  F004         	goto	l823
+   730   0008F8                     u20:
+   731   0008F8  0012               	return		;funcret
+   732   0008FA                     __end_of_data:
+   733                           	callstack 0
+   734                           
+   735 ;; *************** function _cmd *****************
+   736 ;; Defined at:
+   737 ;;		line 124 in file "matrixcalculator1.c"
+   738 ;; Parameters:    Size  Location     Type
+   739 ;;  a               1    wreg     unsigned char 
+   740 ;; Auto vars:     Size  Location     Type
+   741 ;;  a               1    0[COMRAM] unsigned char 
+   742 ;;  i               2    3[COMRAM] int 
+   743 ;;  i               2    1[COMRAM] int 
+   744 ;; Return value:  Size  Location     Type
+   745 ;;                  1    wreg      void 
+   746 ;; Registers used:
+   747 ;;		wreg, status,2, status,0
+   748 ;; Tracked objects:
+   749 ;;		On entry : 0/0
+   750 ;;		On exit  : 0/0
+   751 ;;		Unchanged: 0/0
+   752 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   753 ;;      Params:         0       0       0       0       0       0       0
+   754 ;;      Locals:         5       0       0       0       0       0       0
+   755 ;;      Temps:          0       0       0       0       0       0       0
+   756 ;;      Totals:         5       0       0       0       0       0       0
+   757 ;;Total ram usage:        5 bytes
+   758 ;; Hardware stack levels used: 1
+   759 ;; This function calls:
+   760 ;;		Nothing
+   761 ;; This function is called by:
+   762 ;;		_main
+   763 ;; This function uses a non-reentrant model
+   764 ;;
+   765                           
+   766                           	psect	text3
+   767   0008FA                     __ptext3:
+   768                           	callstack 0
+   769   0008FA                     _cmd:
+   770                           	callstack 30
+   771                           
+   772                           ;incstack = 0
+   773                           ;cmd@a stored from wreg
+   774   0008FA  6E01               	movwf	cmd@a^0,c
+   775   0008FC                     
+   776                           ;matrixcalculator1.c: 124:    void cmd(unsigned char a );matrixcalculator1.c: 125: {;mat
+      +                          rixcalculator1.c: 126:     RC0=0;
+   777   0008FC  9082               	bcf	3970,0,c	;volatile
+   778                           
+   779                           ;matrixcalculator1.c: 127:     RC1=0;
+   780   0008FE  9282               	bcf	3970,1,c	;volatile
+   781   000900                     
+   782                           ;matrixcalculator1.c: 128:     PORTD=a;
+   783   000900  C001  FF83         	movff	cmd@a,3971	;volatile
+   784   000904                     
+   785                           ;matrixcalculator1.c: 129:     RC2=1;
+   786   000904  8482               	bsf	3970,2,c	;volatile
+   787   000906                     
+   788                           ;matrixcalculator1.c: 130:     for(int i=0;i<=100;i++);
+   789   000906  0E00               	movlw	0
+   790   000908  6E03               	movwf	(cmd@i+1)^0,c
+   791   00090A  0E00               	movlw	0
+   792   00090C  6E02               	movwf	cmd@i^0,c
+   793   00090E                     l839:
+   794   00090E  4A02               	infsnz	cmd@i^0,f,c
+   795   000910  2A03               	incf	(cmd@i+1)^0,f,c
+   796   000912  BE03               	btfsc	(cmd@i+1)^0,7,c
+   797   000914  EF95  F004         	goto	u31
+   798   000918  5003               	movf	(cmd@i+1)^0,w,c
+   799   00091A  E109               	bnz	u30
+   800   00091C  0E65               	movlw	101
+   801   00091E  5C02               	subwf	cmd@i^0,w,c
+   802   000920  A0D8               	btfss	status,0,c
+   803   000922  EF95  F004         	goto	u31
+   804   000926  EF97  F004         	goto	u30
+   805   00092A                     u31:
+   806   00092A  EF87  F004         	goto	l839
+   807   00092E                     u30:
+   808   00092E                     
+   809                           ;matrixcalculator1.c: 131:     RC2=0;
+   810   00092E  9482               	bcf	3970,2,c	;volatile
+   811   000930                     
+   812                           ;matrixcalculator1.c: 132:     for(int i=0;i<=5000;i++);
+   813   000930  0E00               	movlw	0
+   814   000932  6E05               	movwf	(cmd@i_67+1)^0,c
+   815   000934  0E00               	movlw	0
+   816   000936  6E04               	movwf	cmd@i_67^0,c
+   817   000938                     l849:
+   818   000938  4A04               	infsnz	cmd@i_67^0,f,c
+   819   00093A  2A05               	incf	(cmd@i_67+1)^0,f,c
+   820   00093C  BE05               	btfsc	(cmd@i_67+1)^0,7,c
+   821   00093E  EFAA  F004         	goto	u41
+   822   000942  0E89               	movlw	137
+   823   000944  5C04               	subwf	cmd@i_67^0,w,c
+   824   000946  0E13               	movlw	19
+   825   000948  5805               	subwfb	(cmd@i_67+1)^0,w,c
+   826   00094A  A0D8               	btfss	status,0,c
+   827   00094C  EFAA  F004         	goto	u41
+   828   000950  EFAC  F004         	goto	u40
+   829   000954                     u41:
+   830   000954  EF9C  F004         	goto	l849
+   831   000958                     u40:
+   832   000958  0012               	return		;funcret
+   833   00095A                     __end_of_cmd:
+   834                           	callstack 0
+   835                           
+   836                           	psect	rparam
+   837   000000                     tosu	equ	0xFFF
+   838                           tosh	equ	0xFFE
+   839                           tosl	equ	0xFFD
+   840                           stkptr	equ	0xFFC
+   841                           pclatu	equ	0xFFB
+   842                           pclath	equ	0xFFA
+   843                           pcl	equ	0xFF9
+   844                           tblptru	equ	0xFF8
+   845                           tblptrh	equ	0xFF7
+   846                           tblptrl	equ	0xFF6
+   847                           tablat	equ	0xFF5
+   848                           prodh	equ	0xFF4
+   849                           prodl	equ	0xFF3
+   850                           indf0	equ	0xFEF
+   851                           postinc0	equ	0xFEE
+   852                           postdec0	equ	0xFED
+   853                           preinc0	equ	0xFEC
+   854                           plusw0	equ	0xFEB
+   855                           fsr0h	equ	0xFEA
+   856                           fsr0l	equ	0xFE9
+   857                           wreg	equ	0xFE8
+   858                           indf1	equ	0xFE7
+   859                           postinc1	equ	0xFE6
+   860                           postdec1	equ	0xFE5
+   861                           preinc1	equ	0xFE4
+   862                           plusw1	equ	0xFE3
+   863                           fsr1h	equ	0xFE2
+   864                           fsr1l	equ	0xFE1
+   865                           bsr	equ	0xFE0
+   866                           indf2	equ	0xFDF
+   867                           postinc2	equ	0xFDE
+   868                           postdec2	equ	0xFDD
+   869                           preinc2	equ	0xFDC
+   870                           plusw2	equ	0xFDB
+   871                           fsr2h	equ	0xFDA
+   872                           fsr2l	equ	0xFD9
+   873                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     22
+    Constant    0
+    Data        0
+    BSS         0
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95      8       8
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+
+Pointer List with Targets:
+
+    display@p	PTR const unsigned char  size(1) Largest target is 2
+		 -> STR_1(CODE[2]), STR_10(CODE[2]), STR_11(CODE[2]), STR_2(CODE[2]), 
+		 -> STR_3(CODE[2]), STR_4(CODE[2]), STR_5(CODE[2]), STR_6(CODE[2]), 
+		 -> STR_7(CODE[2]), STR_8(CODE[2]), STR_9(CODE[2]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_display
+    _display->_data
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0    1078
+                                              6 COMRAM     2     2      0
+                                _cmd
+                            _display
+ ---------------------------------------------------------------------------------
+ (1) _display                                              1     0      1     956
+                                              5 COMRAM     1     0      1
+                               _data
+ ---------------------------------------------------------------------------------
+ (2) _data                                                 5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ (1) _cmd                                                  5     5      0      75
+                                              0 COMRAM     5     5      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _cmd
+   _display
+     _data
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMRAM           5F      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMRAM              5F      8       8       1        8.4%
+STACK                0      0       0       2        0.0%
+DATA                 0      0       0       3        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBIGSFRh          3E      0       0      16        0.0%
+BITBIGSFRlh         2B      0       0      17        0.0%
+BITBIGSFRllh         F      0       0      18        0.0%
+BITBIGSFRlll       281      0       0      19        0.0%
+ABS                  0      0       0      20        0.0%
+BIGRAM             5FF      0       0      21        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR_3             0      0       0     200        0.0%
+SFR_3                0      0       0     200        0.0%
+BITSFR_2             0      0       0     200        0.0%
+SFR_2                0      0       0     200        0.0%
+BITSFR_1             0      0       0     200        0.0%
+SFR_1                0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.46 build 20240104201356 
+Symbol Table                                                                                   Sat Aug 10 18:22:20 2024
+
+                     l41 068A                       l42 0678                       l60 0736  
+                     l52 06D4                       l36 0662                       l61 0724  
+                     l37 0650                       l70 0774                       l46 06B2  
+                     l55 070E                       l47 06A0                       l80 07C4  
+                     l56 06FC                       l90 082A                       l74 07AE  
+                     l66 074C                       l83 0844                       l75 079C  
+                     l93 0892                       l85 07FC                       l69 0786  
+                     l94 086C                       l95 085A                       u10 08CE  
+                     u11 08CA                       u20 08F8                       u21 08F4  
+                     u30 092E                       u31 092A                       u40 0958  
+                     u41 0954                      l100 0880                      l112 0958  
+                    l116 08CE                      l109 092E                      l125 0984  
+                    l119 08F8                      l801 089C                      l803 08A0  
+                    l813 08AE                      l805 08A4                      l831 0904  
+                    l823 08D8                      l815 08B2                      l807 08A6  
+                    l841 0912                      l833 0906                      l825 08DC  
+                    l817 08D0                      l921 095A                      l851 093C  
+                    l843 0930                      l827 08FC                      l923 095E  
+                    l931 0630                      l829 0900                      l925 096A  
+                    l941 0698                      l933 0636                      l839 090E  
+                    l927 096C                      l951 06E6                      l943 06C0  
+                    l935 063A                      l849 0938                      l961 075E  
+                    l953 06F4                      l945 06C6                      l937 0648  
+                    l929 0618                      l971 07D6                      l963 076C  
+                    l955 071C                      l947 06CE                      l939 0670  
+                    l981 0824                      l973 07E4                      l965 0794  
+                    l957 0744                      l949 06E2                      l983 0838  
+                    l975 07F6                      l967 07BC                      l959 075A  
+                    l985 0852                      l977 080A                      l969 07D2  
+                    l987 087A                      l979 0812                      _RC0 7C10  
+                    _RC1 7C11                      _RB4 7C0C                      _RC2 7C12  
+                    _RB5 7C0D                      _RB6 7C0E                      _RB7 7C0F  
+                    u400 0698                      u401 0694                      u410 06AE  
+                    u411 06AA                      u500 076C                      u420 06C0  
+                    u501 0768                      u421 06BC                      u350 0984  
+                    u510 0782                      u430 06E2                      u351 0980  
+                    u511 077E                      u431 06DE                      u600 0838  
+                    u520 0794                      u440 06F4                      u360 0648  
+                    u601 0834                      u521 0790                      u441 06F0  
+                    u361 0644                      u610 0852                      u530 07AA  
+                    u450 070A                      u370 065E                      u611 084E  
+                    u531 07A6                      u451 0706                      u371 065A  
+                    u620 0868                      u540 07BC                      u460 071C  
+                    u380 0670                      u621 0864                      u541 07B8  
+                    u461 0718                      u381 066C                      u630 087A  
+                    u550 07D2                      u470 0732                      u390 0686  
+                    u631 0876                      u551 07CE                      u471 072E  
+                    u391 0682                      u640 088E                      u560 07E4  
+                    u480 0744                      u641 088A                      u561 07E0  
+                    u481 0740                      u570 07F6                      u490 075A  
+                    u571 07F2                      u491 0756                      u580 080A  
+                    u581 0806                      u590 0824                      u591 0820  
+                    _cmd 08FA                     ?_cmd 0001                     STR_1 0611  
+                   STR_2 0613                     STR_3 0615                     STR_4 0601  
+                   STR_5 060B                     STR_6 060D                     STR_7 060F  
+                   STR_8 0605                     STR_9 0607                     _data 089A  
+                   cmd@a 0001                     cmd@i 0002                     _main 0618  
+                   start 0000             ___param_bank 0000                    ??_cmd 0001  
+                  ?_data 0001                    ?_main 0001                    STR_10 0609  
+                  STR_11 0603                    _PORTB 0F81                    _PORTD 0F83  
+                  _TRISB 0F93                    _TRISC 0F94                    _TRISD 0F95  
+        __end_of_display 0986                    data@a 0001                    data@i 0002  
+                  tablat 0FF5                    status 0FD8          __initialization 0986  
+           __end_of_data 08FA             __end_of_main 089A                   ??_data 0001  
+                 ??_main 0007            __activetblptr 0001                   _ADCON1 0FC1  
+                 isa$std 0001                ??_display 0007             __mediumconst 0000  
+                 tblptrh 0FF7                   tblptrl 0FF6                   tblptru 0FF8  
+             __accesstop 0060  __end_of__initialization 0986            ___rparam_used 0001  
+         __pcstackCOMRAM 0001                  __Hparam 0000                  __Lparam 0000  
+           __psmallconst 0600                  __pcinit 0986                  __ramtop 0600  
+                __ptext0 0618                  __ptext1 095A                  __ptext2 089A  
+                __ptext3 08FA                  cmd@i_67 0004                  _display 095A  
+   end_of_initialization 0986      start_initialization 0986              __end_of_cmd 095A  
+               ?_display 0006              __smallconst 0600                main@count 0007  
+               __Hrparam 0000                 __Lrparam 0000             __Lsmallconst 0600  
+               data@i_71 0004                 isa$xinst 0000                 display@p 0006  
